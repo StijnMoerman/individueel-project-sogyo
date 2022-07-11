@@ -1,6 +1,4 @@
-# Individueel Project
-
-Zeeslag
+# Individueel Project Zeeslag
 
 ## Getting started
 
