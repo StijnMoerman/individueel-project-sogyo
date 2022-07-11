@@ -35,7 +35,7 @@ module.exports = {
         publicPath: '/',
     },
     devServer: {
-        port: 3000,
+        port: 9000,
         static: './dist',
         historyApiFallback: true,
         proxy: {
@@ -46,7 +46,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'Battleship',
             template: 'public/index.html',
-            favicon: 'public/favicon.ico',
+            favicon: 'public/bootje.png',
         }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('development')

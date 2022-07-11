@@ -12,7 +12,7 @@ import "./Battleship.css";
  * 
  * Child components can modify the game state by calling the setGameState (which they recieve as prop.)
  */
-export function Mancala() {
+export function Battleship() {
 
     // useState is a so called React hook.
     // It is used to manage variables.  When the setGameState function is called, React updates the UI as needed
