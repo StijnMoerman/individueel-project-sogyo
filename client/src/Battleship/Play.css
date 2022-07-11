@@ -1,0 +1,38 @@
+/** Add some styles */
+
+.button {
+    background-color: hotpink;
+    font-size: 100px;
+    font-family: Copperplate, Papyrus, fantasy;
+    color: blue;
+    border-radius: 50%;
+    width: 170px;
+}
+.button:hover {
+    background-color: magenta;
+    color: white;
+}
+.button:active {
+    background-color: red;
+}
+.disabled {
+    pointer-events: none;
+}
+.button:disabled {
+    pointer-events: none;
+}
+
+.buttonTable {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+td {
+    text-align: center;
+    font-size: 50px;
+    color: white;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

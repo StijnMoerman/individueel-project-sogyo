@@ -39,12 +39,12 @@ module.exports = {
         static: './dist',
         historyApiFallback: true,
         proxy: {
-            '/mancala': 'http://localhost:8080',
+            '/battleship': 'http://localhost:8080',
         },
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Mancala',
+            title: 'Battleship',
             template: 'public/index.html',
             favicon: 'public/favicon.ico',
         }),

@@ -1,7 +1,7 @@
 {
-  "name": "mancala-mvc",
+  "name": "battleship-mvc",
   "version": "1.0.0",
-  "description": "Front-end for the mancala mvc",
+  "description": "Front-end for the battleship mvc",
   "private": true,
   "scripts": {
     "start": "webpack serve",

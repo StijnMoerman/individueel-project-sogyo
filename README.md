@@ -1,4 +1,4 @@
-# Individueel Project Zeeslag
+# Individual Project Battleship
 
 ## Getting started
 

@@ -1,0 +1,14 @@
+.startGameButton {
+    font-size: 2em;
+    background-color: Aqua;
+    border: 2px solid black;
+    transition-duration: 1s;
+}
+.startGameButton:hover {
+    background-color: Yellow;
+}
+
+.errorMessage {
+    height: 1em;
+    color: red;
+}
