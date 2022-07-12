@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StartGame } from "./StartGame";
 import { Play } from "./Play";
+import { SetUpGame } from "./SetUpGame";
 import type { GameState } from "../gameState";
 import "./Battleship.css";
 
