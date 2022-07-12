@@ -1,0 +1,65 @@
+image: gradle:latest
+
+
+stages:
+  - build
+  - test
+  - coverage
+  - checkstyle
+
+build-job:
+  stage: build
+  script:
+    - echo "$CI_MERGE_REQUEST_DIFF_ID"
+    - echo "$CI_SERVER_VERSION"
+    - gradle assemble
+    - gradle currentVersion
+
+test-job:
+  stage: test
+  script:
+    - gradle test
+    - gradle jacocoTestReport
+  artifacts:
+    name: "$CI_JOB_NAME"
+    paths:
+      - $CI_PROJECT_DIR/domain/
+      - $CI_PROJECT_DIR/api/
+
+coverage-job-domain:
+  stage: coverage
+  needs:
+    - job: test-job
+      artifacts: true
+  script:
+    - cat domain/build/reports/jacoco/test/html/index.html | grep -o 'Total[^%]*%' | sed 's/<.*>/ /; s/Total/Domain Code Coverage:/'
+  coverage: '/Domain Code Coverage:.*?([0-9]{1,3})%/'
+
+coverage-job-api:
+  stage: coverage
+  needs:
+    - job: test-job
+      artifacts: true
+  script:
+    - cat api/build/reports/jacoco/test/html/index.html | grep -o 'Total[^%]*%' | sed 's/<.*>/ /; s/Total/API Code Coverage:/'
+  coverage: '/API Code Coverage:.*?([0-9]{1,3})%/'
+
+coverage-job:
+  stage: coverage
+  needs:
+    - job: test-job
+      artifacts: true
+  script:
+    - gradle jacocoTestCoverageVerification
+  artifacts:
+    when: on_failure
+    paths:
+      - $CI_PROJECT_DIR/*/build/reports/*
+
+checkstyle-job:
+  stage: checkstyle
+  script:
+    - gradle check
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/*/src/*
