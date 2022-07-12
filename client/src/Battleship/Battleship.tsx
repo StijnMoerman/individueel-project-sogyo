@@ -11,7 +11,7 @@ import "./Battleship.css";
  * If there's an active game this component holds the game state. This game state can be passed as a prop
  * to child components as needed.
  * 
- * Child components can modify the game state by calling the setGameState (which they recieve as prop.)
+ * Child components can modify the game state by calling the setGameState (which they receive as prop.)
  */
 export function Battleship() {
 
