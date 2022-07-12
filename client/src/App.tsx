@@ -8,7 +8,7 @@ import "./App.css";
 export function App() {
     return (
         <Router>
-            {/* The header with navigation options is always on top of every page */}
+            {/*  The header with navigation options is always on top of every page */}
             <Header />
 
             <div className="main-content">
