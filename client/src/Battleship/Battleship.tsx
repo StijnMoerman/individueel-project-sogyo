@@ -5,7 +5,7 @@ import type { GameState } from "../gameState";
 import "./Battleship.css";
 
 /**
- * The base component for the Mancala game. If there's no active game, the `StartGame` component allows
+ * The base component for the Battleship game. If there's no active game, the `StartGame` component allows
  * users to enter two player names and start a new game.
  * If there's an active game this component holds the game state. This game state can be passed as a prop
  * to child components as needed.

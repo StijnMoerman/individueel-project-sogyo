@@ -32,7 +32,7 @@ export function StartGame({ setGameState }: StartGameProps) {
         setErrorMessage("");
 
         try {
-            const response = await fetch('mancala/api/start', {
+            const response = await fetch('battleship/api/start', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

@@ -39,7 +39,7 @@ module.exports = {
         static: './dist',
         historyApiFallback: true,
         proxy: {
-            '/battleship': 'http://localhost:8080',
+            '/battleship': 'http://localhost:9090',
         },
     },
     plugins: [
