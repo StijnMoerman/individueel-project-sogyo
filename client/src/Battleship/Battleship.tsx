@@ -25,5 +25,9 @@ export function Battleship() {
         return <StartGame setGameState={setGameState} />
     }
 
+    if (!gameState.players[0].ownMap || !gameState.players[1].ownMap) {
+        return <SetUpGame gameState={gameState} setGameState={setGameState} />
+    }
+
     return <Play gameState={gameState} setGameState={setGameState} />
 }

@@ -1,1 +1,15 @@
 /** Add some styles */
+
+table {
+    table-layout: fixed;
+    height: 600px;
+    width: 600px;
+    background-color: aqua;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th,td {
+    border: 1px solid black;
+}

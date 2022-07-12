@@ -9,12 +9,23 @@ export interface GameState {
 
 interface Player {
     name: string;
-    pits: Pit[];
+    boats: Boat[];
+    ownMap: SetUpMapEntry[][];
+    guessMap: GuessMapEntry[][];
     type: "player1" | "player2"; // only "player1" and "player2" are valid options for this string
     hasTurn: boolean;
 }
 
-interface Pit {
+interface Boat {
     index: number;
-    nrOfStones: number;
+    destroyed: boolean;
+}
+
+interface SetUpMapEntry {
+    boat: boolean
+    available: boolean
+}
+
+interface GuessMapEntry {
+    status: "unknown" | "miss" | "hit";
 }
