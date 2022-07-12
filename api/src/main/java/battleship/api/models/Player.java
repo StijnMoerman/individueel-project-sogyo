@@ -1,12 +1,14 @@
 package battleship.api.models;
 
+import battleship.domain.Battleship;
+
 public class Player {
     public Player(battleship.domain.Battleship battleship, 
             String name, boolean isFirstPlayer) {
 		this.name = name;
 		type = isFirstPlayer ? "player1" : "player2";
         hasTurn = battleship.isPlayersTurn(isFirstPlayer ? 
-            battleship.PLAYER_ONE : battleship.PLAYER_TWO);
+            Battleship.PLAYER_ONE : Battleship.PLAYER_TWO);
     }
     
     String name;

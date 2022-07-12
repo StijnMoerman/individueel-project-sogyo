@@ -7,7 +7,7 @@ type SetUpGameProps = {
     setGameState(newGameState: GameState): void;
 }
 
-export function SetUpGame({ gameState, setGameState }: PlayProps) {
+export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
 
     const [playMessage, setPlayMessage] = useState("Turn of " +gameState.players[0].name);
 

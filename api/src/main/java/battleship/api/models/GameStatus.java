@@ -1,5 +1,7 @@
 package battleship.api.models;
 
+import battleship.domain.Battleship;
+
 public class GameStatus {
     boolean endOfGame;
     public boolean getEndOfGame() { return endOfGame; }
@@ -11,11 +13,11 @@ public class GameStatus {
             String namePlayer1, String namePlayer2) {
         this.endOfGame = battleship.isEndOfGame();
         int winner = battleship.getWinner();
-        if(winner == battleship.NO_PLAYERS) {
+        if(winner == Battleship.NO_PLAYERS) {
             this.winner = null;
-        } else if(winner == battleship.PLAYER_ONE) {
+        } else if(winner == Battleship.PLAYER_ONE) {
             this.winner = namePlayer1;
-        } else if(winner == battleship.PLAYER_TWO) {
+        } else if(winner == Battleship.PLAYER_TWO) {
             this.winner = namePlayer2;
         } else {
             this.winner = namePlayer1  + " and " + namePlayer2;
