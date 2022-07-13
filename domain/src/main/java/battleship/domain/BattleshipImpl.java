@@ -11,7 +11,7 @@ public class BattleshipImpl implements Battleship {
         if (player == 1) {
             return firstPlayer;
         }
-        return firstPlayer.nextPlayer;
+        return firstPlayer.getNextPlayer();
     }
 
     @Override
@@ -21,11 +21,17 @@ public class BattleshipImpl implements Battleship {
 
 	@Override
 	public boolean isEndOfGame() {
-        return false;
+        return (getPlayer(1).getFleet().isDestroyed() || getPlayer(2).getFleet().isDestroyed());
     }
 
 	@Override
 	public int getWinner() {
+        if (getPlayer(1).getFleet().isDestroyed()) {
+            return Battleship.PLAYER_TWO;
+        }
+        if (getPlayer(2).getFleet().isDestroyed()) {
+            return Battleship.PLAYER_ONE;
+        }
         return Battleship.NO_PLAYERS;
     }
 }

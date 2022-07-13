@@ -1,11 +1,25 @@
 package battleship.domain;
 
 public class Player {
-    Fleet fleet = new Fleet();
+    private Fleet fleet = new Fleet();
+    public Fleet getFleet() {
+        return fleet;
+    }
+
+    public void setFleet(Fleet fleet) {
+        this.fleet = fleet;
+    }
+
     boolean firstPlayer;
     boolean hasTurn;
-    Player nextPlayer;
+    private Player nextPlayer;
+    
+    public Player getNextPlayer() {
+        return nextPlayer;
+    }
+
     PlaceEntry[][] placeMap;
+    GuessEntry[][] guessMap;
     
 
     public Player () {

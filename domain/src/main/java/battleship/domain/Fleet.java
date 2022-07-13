@@ -2,7 +2,15 @@ package battleship.domain;
 
 public class Fleet {
     Ship ships[] = new Ship[5];
-    boolean destroyed = false;
+    private boolean destroyed = false;
+
+    public boolean isDestroyed() {
+        return destroyed;
+    }
+
+    public void setDestroyed(boolean destroyed) {
+        this.destroyed = destroyed;
+    }
 
     public Fleet() {
         this.ships[0] = new Ship(5);
