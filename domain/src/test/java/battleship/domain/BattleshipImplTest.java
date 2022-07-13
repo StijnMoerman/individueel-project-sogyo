@@ -51,6 +51,22 @@ public class BattleshipImplTest {
         assertFalse(Battleship.getPlayer(2).getFleet().ships[4].getDestroyed());
     }
 
+    @Test
+    public void placeMapStillEmpty() {
+        BattleshipImpl Battleship = new BattleshipImpl();
+        PlaceEntry leftUpperPlaceEntryPlayerOne = Battleship.getPlayer(1).placeMap[0][0];
+        assertFalse(leftUpperPlaceEntryPlayerOne.getHasShip());
+        assertEquals(null,leftUpperPlaceEntryPlayerOne.getShip());
+    }
+
+    @Test
+    public void guessMapStillEmpty() {
+        BattleshipImpl Battleship = new BattleshipImpl();
+        GuessEntry leftUpperGuessEntryPlayerOne = Battleship.getPlayer(1).guessMap[0][0];
+        assertFalse(leftUpperGuessEntryPlayerOne.getGuessed());
+        assertFalse(leftUpperGuessEntryPlayerOne.getHit());
+    }
+
 
 
 }
