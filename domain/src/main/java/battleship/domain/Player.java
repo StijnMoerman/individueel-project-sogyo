@@ -20,11 +20,6 @@ public class Player {
     public Fleet getFleet() {
         return fleet;
     }
-
-    public void setFleet(Fleet fleet) {
-        this.fleet = fleet;
-    }
-
     
     public Player getNextPlayer() {
         return nextPlayer;
