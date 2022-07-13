@@ -7,7 +7,7 @@ public class GuessEntry {
     public boolean getGuessed () {
         return guessed;
     }
-    
+
     public void entryGuessed () {
         guessed = true;
     }
@@ -16,7 +16,7 @@ public class GuessEntry {
         return hit;
     }
     
-    public void boatHit () {
+    public void shipHit () {
         hit = true;
     }
     

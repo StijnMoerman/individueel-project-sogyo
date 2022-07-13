@@ -37,5 +37,14 @@ public class Player {
         return nextPlayer;
     }
 
+    public void doTurn (int xEntry, int yEntry) {
+        guessMap[xEntry][yEntry].entryGuessed();
+        if (nextPlayer.placeMap[xEntry][yEntry].getHasShip()) {
+            guessMap[xEntry][yEntry].shipHit();
+            nextPlayer.placeMap[xEntry][yEntry].getShip().getHit();
+            nextPlayer.getFleet().setDestroyed();
+        }
+    }
+
 
 }
