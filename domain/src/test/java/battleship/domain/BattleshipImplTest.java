@@ -67,6 +67,21 @@ public class BattleshipImplTest {
         assertFalse(leftUpperGuessEntryPlayerOne.getHit());
     }
 
+    @Test
+    public void testHitFirstBoatFirstPlayer() {
+        BattleshipImpl Battleship = new BattleshipImpl();
+        Battleship.getPlayer(1).getFleet().ships[0].getHit();
+        assertFalse(Battleship.getPlayer(1).getFleet().ships[0].getDestroyed());
+    }
+
+    @Test
+    public void testDestroyFifthBoatFirstPlayer() {
+        BattleshipImpl Battleship = new BattleshipImpl();
+        Battleship.getPlayer(1).getFleet().ships[4].getHit();
+        Battleship.getPlayer(1).getFleet().ships[4].getHit();
+        assertTrue(Battleship.getPlayer(1).getFleet().ships[4].getDestroyed());
+    }
+
 
 
 }
