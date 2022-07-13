@@ -7,9 +7,16 @@ public class BattleshipImpl implements Battleship {
         
     }
 
+    public Player getPlayer (int player) {
+        if (player == 1) {
+            return firstPlayer;
+        }
+        return firstPlayer.nextPlayer;
+    }
+
     @Override
     public boolean isPlayersTurn(int player) {
-        return player == 1;
+        return getPlayer(player).hasTurn;
     }
 
 	@Override
