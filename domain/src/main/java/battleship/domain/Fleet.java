@@ -1,7 +1,7 @@
 package battleship.domain;
 
 public class Fleet {
-    Ship[] ships;
+    Ship ships[] = new Ship[5];
     boolean destroyed = false;
 
     public Fleet() {
