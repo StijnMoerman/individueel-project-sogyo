@@ -56,7 +56,7 @@ public class BattleshipImplTest {
         BattleshipImpl Battleship = new BattleshipImpl();
         PlaceEntry leftUpperPlaceEntryPlayerOne = Battleship.getPlayer(1).placeMap[0][0];
         assertFalse(leftUpperPlaceEntryPlayerOne.getHasShip());
-        assertEquals(null,leftUpperPlaceEntryPlayerOne.getShip());
+        assertNull(leftUpperPlaceEntryPlayerOne.getShip());
     }
 
     @Test
