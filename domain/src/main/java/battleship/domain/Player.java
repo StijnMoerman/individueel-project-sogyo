@@ -10,11 +10,23 @@ public class Player {
     public Player () {
         firstPlayer = true;
         nextPlayer = new Player(this);
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                placeMap[i][j] = new PlaceEntry();
+                guessMap[i][j] = new GuessEntry();
+            }
+        }
     }
 
     private Player (Player firstPlayer) {
         this.firstPlayer = false;
         nextPlayer = firstPlayer;
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                placeMap[i][j] = new PlaceEntry();
+                guessMap[i][j] = new GuessEntry();
+            }
+        }
     }
 
     public Fleet getFleet() {
