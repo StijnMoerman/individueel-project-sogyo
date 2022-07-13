@@ -1,6 +1,23 @@
 package battleship.domain;
 
 public class GuessEntry {
-    boolean guessed = false;
-    boolean hit = false;
+    private boolean guessed = false;
+    private boolean hit = false;
+
+    public boolean getGuessed () {
+        return guessed;
+    }
+    
+    public void entryGuessed () {
+        guessed = true;
+    }
+    
+    public boolean getHit () {
+        return hit;
+    }
+    
+    public void boatHit () {
+        hit = true;
+    }
+    
 }

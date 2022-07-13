@@ -2,11 +2,13 @@ package battleship.domain;
 
 public class BattleshipImpl implements Battleship {
     Player firstPlayer = new Player();
+    Player playerOnTurn = firstPlayer;
 
     public BattleshipImpl() {
         
     }
 
+    @Override
     public Player getPlayer (int player) {
         if (player == 1) {
             return firstPlayer;
@@ -16,7 +18,7 @@ public class BattleshipImpl implements Battleship {
 
     @Override
     public boolean isPlayersTurn(int player) {
-        return getPlayer(player).hasTurn;
+        return getPlayer(player) == playerOnTurn;
     }
 
 	@Override

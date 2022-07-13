@@ -8,8 +8,14 @@ public class Fleet {
         return destroyed;
     }
 
-    public void setDestroyed(boolean destroyed) {
-        this.destroyed = destroyed;
+    public void setDestroyed() {
+        boolean maybeDestroyed = true;
+        for (int i = 0; i < ships.length; i++) {
+            if (!this.ships[i].getDestroyed()) {
+                maybeDestroyed = false;
+            }
+        }
+        destroyed = maybeDestroyed;
     }
 
     public Fleet() {
