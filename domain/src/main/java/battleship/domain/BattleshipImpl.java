@@ -1,10 +1,10 @@
 package battleship.domain;
 
 public class BattleshipImpl implements Battleship {
-
+    Player firstPlayer = new Player();
 
     public BattleshipImpl() {
-
+        
     }
 
     @Override
