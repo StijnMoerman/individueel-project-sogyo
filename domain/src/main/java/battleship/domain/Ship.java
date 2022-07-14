@@ -1,9 +1,13 @@
 package battleship.domain;
 
 public class Ship {
-    int length;
+    private int length;
     private boolean destroyed = false;
     private int damage = 0;
+
+    public int getLength() {
+        return length;
+    }
 
     public void getHit() {
         this.damage++;

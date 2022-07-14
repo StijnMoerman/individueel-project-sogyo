@@ -52,29 +52,29 @@ public class Player {
 
     public void placeShip (int shipEntry, int xEntry, int yEntry, String direction) {
         Ship placedShip = getShip(shipEntry);
-        if (direction == "North" && yEntry + 1 < placedShip.length ||
-            direction == "South" && 10 - yEntry < placedShip.length ||
-            direction == "West" && xEntry + 1 < placedShip.length ||
-            direction == "East" && 10 - xEntry < placedShip.length) {
+        if (direction == "North" && yEntry + 1 < placedShip.getLength() ||
+            direction == "South" && 10 - yEntry < placedShip.getLength() ||
+            direction == "West" && xEntry + 1 < placedShip.getLength() ||
+            direction == "East" && 10 - xEntry < placedShip.getLength()) {
             // not possible
         }
-        else if (direction == "North") {
-            for (int i = 0; i < placedShip.length; i++) {
+        else if (direction == "North" && yEntry > placedShip.getLength()) {
+            for (int i = 0; i < placedShip.getLength(); i++) {
                 placeMap[xEntry][yEntry-i].assignShip(getShip(shipEntry));
             }
         }
         else if (direction == "South") {
-            for (int i = 0; i < placedShip.length; i++) {
+            for (int i = 0; i < placedShip.getLength(); i++) {
                 placeMap[xEntry][yEntry+i].assignShip(getShip(shipEntry));
             }
         }
         else if (direction == "West") {
-            for (int i = 0; i < placedShip.length; i++) {
+            for (int i = 0; i < placedShip.getLength(); i++) {
                 placeMap[xEntry-i][yEntry].assignShip(getShip(shipEntry));
             }
         }
         else if (direction == "East") {
-            for (int i = 0; i < placedShip.length; i++) {
+            for (int i = 0; i < placedShip.getLength(); i++) {
                 placeMap[xEntry+i][yEntry].assignShip(getShip(shipEntry));
             }
         }
