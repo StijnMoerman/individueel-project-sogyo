@@ -8,7 +8,7 @@ public class GuessMapEntry {
         else if (!battleship.getPlayer(player).getGuessMap()[x][y].getHit()) {
             status = "miss";
         }
-        else if (battleship.getPlayer(player).getNextPlayer().getPlaceMap()[x][y].getShip().getDestroyed()) {
+        else if (battleship.getPlayer(player).getNextPlayer().getPlaceMap()[x][y].getShip().isDestroyed()) {
             status = "sunk";
         }
         else {
