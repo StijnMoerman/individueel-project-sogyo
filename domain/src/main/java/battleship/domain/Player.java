@@ -41,6 +41,14 @@ public class Player {
         return nextPlayer;
     }
 
+    public PlaceEntry[][] getPlaceMap () {
+        return placeMap;
+    }
+
+    public GuessEntry[][] getGuessMap () {
+        return guessMap;
+    }
+
     public void doTurn (int xEntry, int yEntry) {
         guessMap[xEntry][yEntry].entryGuessed();
         if (nextPlayer.placeMap[xEntry][yEntry].getHasShip()) {

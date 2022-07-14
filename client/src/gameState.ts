@@ -16,7 +16,7 @@ interface Player {
 }
 
 interface SetUpMapEntry {
-    boat: boolean
+    hasBoat: boolean
     available: boolean
 }
 
