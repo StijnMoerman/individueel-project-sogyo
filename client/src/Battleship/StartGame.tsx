@@ -44,11 +44,17 @@ export function StartGame({ setGameState }: StartGameProps) {
             if (response.ok) {
                 const gameState = await response.json();
                 setGameState(gameState);
+                console.log(gameState);
             } else {
                 console.error(response.statusText);
             }
-        } catch (error) {
-            console.error(error.toString());
+        } 
+        catch (error) {
+            if (error instanceof Error) {
+                console.error(error.toString());
+            } else {
+                console.log('Unexpected error', error);
+            }
         }
     }
 
