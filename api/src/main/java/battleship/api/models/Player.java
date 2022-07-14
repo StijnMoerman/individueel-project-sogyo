@@ -16,6 +16,7 @@ public class Player {
 				guessMap[i][j] = new GuessMapEntry(battleship, i, j, player);
 			}
 		}
+		fleet = new Fleet(battleship, player);
     }
     
     String name;
@@ -26,6 +27,9 @@ public class Player {
 
 	boolean hasTurn;
 	public boolean getHasTurn() { return hasTurn; }
+
+	Fleet fleet;
+	public Fleet getFleet() { return fleet; }
 
 	SetUpMapEntry[][] setUpMap = new SetUpMapEntry[10][10];
 	public SetUpMapEntry[][] getSetUpMap() { return setUpMap; }

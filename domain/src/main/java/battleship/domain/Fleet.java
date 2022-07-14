@@ -3,19 +3,34 @@ package battleship.domain;
 public class Fleet {
     Ship ships[] = new Ship[5];
     private boolean destroyed = false;
+    private boolean placed = false;
 
     public boolean isDestroyed() {
         return destroyed;
     }
 
+    public boolean isPlaced() {
+        return placed;
+    }
+
     public void setDestroyed() {
         boolean maybeDestroyed = true;
         for (int i = 0; i < ships.length; i++) {
-            if (!this.ships[i].getDestroyed()) {
+            if (!this.ships[i].isDestroyed()) {
                 maybeDestroyed = false;
             }
         }
         destroyed = maybeDestroyed;
+    }
+
+    public void setPlaced() {
+        boolean maybePlaced = true;
+        for (int i = 0; i < ships.length; i++) {
+            if (!this.ships[i].isPlaced()) {
+                maybePlaced = false;
+            }
+        }
+        placed = maybePlaced;
     }
 
     public Fleet() {
