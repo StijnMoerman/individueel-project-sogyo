@@ -81,7 +81,7 @@ public class Player {
             }
         }
         else {
-            // error
+            throw new ArithmeticException("Invalid placement of boats");
         }
     }
 
