@@ -39,16 +39,16 @@ public class BattleshipImplTest {
     @Test
     public void noShipDestroyedYet() {
         BattleshipImpl Battleship = new BattleshipImpl();
-        assertFalse(Battleship.getPlayer(1).getFleet().ships[0].getDestroyed());
-        assertFalse(Battleship.getPlayer(1).getFleet().ships[1].getDestroyed());
-        assertFalse(Battleship.getPlayer(1).getFleet().ships[2].getDestroyed());
-        assertFalse(Battleship.getPlayer(1).getFleet().ships[3].getDestroyed());
-        assertFalse(Battleship.getPlayer(1).getFleet().ships[4].getDestroyed());
-        assertFalse(Battleship.getPlayer(2).getFleet().ships[0].getDestroyed());
-        assertFalse(Battleship.getPlayer(2).getFleet().ships[1].getDestroyed());
-        assertFalse(Battleship.getPlayer(2).getFleet().ships[2].getDestroyed());
-        assertFalse(Battleship.getPlayer(2).getFleet().ships[3].getDestroyed());
-        assertFalse(Battleship.getPlayer(2).getFleet().ships[4].getDestroyed());
+        assertFalse(Battleship.getPlayer(1).getFleet().ships[0].isDestroyed());
+        assertFalse(Battleship.getPlayer(1).getFleet().ships[1].isDestroyed());
+        assertFalse(Battleship.getPlayer(1).getFleet().ships[2].isDestroyed());
+        assertFalse(Battleship.getPlayer(1).getFleet().ships[3].isDestroyed());
+        assertFalse(Battleship.getPlayer(1).getFleet().ships[4].isDestroyed());
+        assertFalse(Battleship.getPlayer(2).getFleet().ships[0].isDestroyed());
+        assertFalse(Battleship.getPlayer(2).getFleet().ships[1].isDestroyed());
+        assertFalse(Battleship.getPlayer(2).getFleet().ships[2].isDestroyed());
+        assertFalse(Battleship.getPlayer(2).getFleet().ships[3].isDestroyed());
+        assertFalse(Battleship.getPlayer(2).getFleet().ships[4].isDestroyed());
     }
 
     @Test
@@ -78,7 +78,7 @@ public class BattleshipImplTest {
     public void testHitFirstBoatFirstPlayer() {
         BattleshipImpl Battleship = new BattleshipImpl();
         Battleship.getPlayer(1).getFleet().ships[0].getHit();
-        assertFalse(Battleship.getPlayer(1).getFleet().ships[0].getDestroyed());
+        assertFalse(Battleship.getPlayer(1).getFleet().ships[0].isDestroyed());
     }
 
     @Test
@@ -86,7 +86,7 @@ public class BattleshipImplTest {
         BattleshipImpl Battleship = new BattleshipImpl();
         Battleship.getPlayer(1).getFleet().ships[4].getHit();
         Battleship.getPlayer(1).getFleet().ships[4].getHit();
-        assertTrue(Battleship.getPlayer(1).getFleet().ships[4].getDestroyed());
+        assertTrue(Battleship.getPlayer(1).getFleet().ships[4].isDestroyed());
     }
 
     @Test
