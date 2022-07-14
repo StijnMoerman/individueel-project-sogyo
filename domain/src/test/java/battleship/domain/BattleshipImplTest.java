@@ -52,6 +52,13 @@ public class BattleshipImplTest {
     }
 
     @Test
+    public void testShipLength() {
+        BattleshipImpl Battleship = new BattleshipImpl();
+        assertEquals(5,Battleship.getPlayer(1).getFleet().ships[0].getLength());
+        assertEquals(2,Battleship.getPlayer(2).getFleet().ships[4].getLength());
+    }
+
+    @Test
     public void placeMapStillEmpty() {
         BattleshipImpl Battleship = new BattleshipImpl();
         PlaceEntry leftUpperPlaceEntryPlayerOne = Battleship.getPlayer(1).placeMap[0][0];
