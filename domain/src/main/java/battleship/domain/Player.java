@@ -32,6 +32,10 @@ public class Player {
     public Fleet getFleet() {
         return fleet;
     }
+
+    public Ship getShip (int shipEntry) {
+        return getFleet().ships[shipEntry];
+    }
     
     public Player getNextPlayer() {
         return nextPlayer;
@@ -43,6 +47,36 @@ public class Player {
             guessMap[xEntry][yEntry].shipHit();
             nextPlayer.placeMap[xEntry][yEntry].getShip().getHit();
             nextPlayer.getFleet().setDestroyed();
+        }
+    }
+
+    public void placeShip (int shipEntry, int xEntry, int yEntry, String direction) {
+        Ship placedShip = getShip(shipEntry);
+        if (direction == "North" && yEntry + 1 < placedShip.length ||
+            direction == "South" && 10 - yEntry < placedShip.length ||
+            direction == "West" && xEntry + 1 < placedShip.length ||
+            direction == "East" && 10 - xEntry < placedShip.length) {
+            // not possible
+        }
+        else if (direction == "North") {
+            for (int i = 0; i < placedShip.length; i++) {
+                placeMap[xEntry][yEntry-i].assignShip(getShip(shipEntry));
+            }
+        }
+        else if (direction == "South") {
+            for (int i = 0; i < placedShip.length; i++) {
+                placeMap[xEntry][yEntry+i].assignShip(getShip(shipEntry));
+            }
+        }
+        else if (direction == "West") {
+            for (int i = 0; i < placedShip.length; i++) {
+                placeMap[xEntry-i][yEntry].assignShip(getShip(shipEntry));
+            }
+        }
+        else if (direction == "East") {
+            for (int i = 0; i < placedShip.length; i++) {
+                placeMap[xEntry+i][yEntry].assignShip(getShip(shipEntry));
+            }
         }
     }
 
