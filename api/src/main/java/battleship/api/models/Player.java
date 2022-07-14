@@ -8,7 +8,8 @@ public class Player {
 		this.name = name;
 		type = isFirstPlayer ? "player1" : "player2";
         hasTurn = battleship.isPlayersTurn(isFirstPlayer ? 
-            Battleship.PLAYER_ONE : Battleship.PLAYER_TWO);
+            Battleship.PLAYER_ONE : Battleship.PLAYER_TWO);	
+		
     }
     
     String name;
