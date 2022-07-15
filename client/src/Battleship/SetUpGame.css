@@ -13,3 +13,11 @@ table {
 th,td {
     border: 1px solid black;
 }
+
+.row {
+    display: flex;
+}
+
+.column {
+    flex: 50%;
+}
