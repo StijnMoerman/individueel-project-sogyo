@@ -21,3 +21,11 @@ th,td {
 .column {
     flex: 50%;
 }
+
+[data-status = "true"] {
+    background-color: aquamarine;
+}
+
+[data-status = "false"] {
+    background-color: darkblue;
+}
