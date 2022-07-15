@@ -5,6 +5,7 @@ public class Fleet {
         for (int i = 0; i < 5; i++) {
             boats[i] = new Boat(i, battleship, player);
         }
+        placed = battleship.getPlayer(player).getFleet().isPlaced();
     }
 
     Boat[] boats = new Boat[5];

@@ -13,6 +13,10 @@ public class Fleet {
         return placed;
     }
 
+    public Ship getShip (int shipIndex) {
+        return ships[shipIndex];
+    }
+
     public void setDestroyed() {
         boolean maybeDestroyed = true;
         for (int i = 0; i < ships.length; i++) {
