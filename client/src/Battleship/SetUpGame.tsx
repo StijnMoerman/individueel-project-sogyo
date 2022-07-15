@@ -74,7 +74,7 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
 
     return (
         <div className="row">
-            <div className="column">
+            <div className="column" id="options">
                 Hi! Welcome to Battleship! Time to set up your fleet! {playMessage}
                 <br></br>
                 Ships: <select value={ship.name} onChange={handleShipChange}>
@@ -85,7 +85,177 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
                     {directions}
                 </select>
             </div>
-            <div className="column">
+            <div className="column" id="map">
+                <div className ="total-btn-group">
+                    <div className="btn-group">
+                        <button data-status={gameState.players[0].setUpMap[0][0].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[1][0].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[2][0].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[3][0].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[4][0].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[5][0].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[6][0].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[7][0].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[8][0].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[9][0].available}></button>
+                    </div>
+                    <div className="btn-group">
+                        <button data-status={gameState.players[0].setUpMap[0][1].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[1][1].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[2][1].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[3][1].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[4][1].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[5][1].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[6][1].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[7][1].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[8][1].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[9][1].available}></button>
+                    </div>
+                    <div className="btn-group">
+                        <button data-status={gameState.players[0].setUpMap[0][2].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[1][2].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[2][2].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[3][2].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[4][2].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[5][2].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[6][2].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[7][2].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[8][2].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[9][2].available}></button>
+                    </div>
+                    <div className="btn-group">
+                        <button data-status={gameState.players[0].setUpMap[0][3].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[1][3].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[2][3].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[3][3].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[4][3].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[5][3].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[6][3].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[7][3].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[8][3].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[9][3].available}></button>
+                    </div>
+                    <div className="btn-group">
+                        <button data-status={gameState.players[0].setUpMap[0][4].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[1][4].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[2][4].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[3][4].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[4][4].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[5][4].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[6][4].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[7][4].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[8][4].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[9][4].available}></button>
+                    </div>
+                    <div className="btn-group">
+                        <button data-status={gameState.players[0].setUpMap[0][5].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[1][5].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[2][5].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[3][5].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[4][5].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[5][5].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[6][5].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[7][5].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[8][5].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[9][5].available}></button>
+                    </div>
+                    <div className="btn-group">
+                        <button data-status={gameState.players[0].setUpMap[0][6].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[1][6].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[2][6].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[3][6].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[4][6].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[5][6].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[6][6].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[7][6].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[8][6].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[9][6].available}></button>
+                    </div>
+                    <div className="btn-group">
+                        <button data-status={gameState.players[0].setUpMap[0][7].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[1][7].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[2][7].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[3][7].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[4][7].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[5][7].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[6][7].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[7][7].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[8][7].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[9][7].available}></button>
+                    </div>
+                    <div className="btn-group">
+                        <button data-status={gameState.players[0].setUpMap[0][8].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[1][8].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[2][8].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[3][8].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[4][8].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[5][8].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[6][8].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[7][8].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[8][8].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[9][8].available}></button>
+                    </div>
+                    <div className="btn-group">
+                        <button data-status={gameState.players[0].setUpMap[0][9].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[1][9].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[2][9].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[3][9].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[4][9].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[5][9].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[6][9].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[7][9].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[8][9].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[9][9].available}></button>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    )
+/*
+    function Form() {
+        const [{ country, state }, setData] = useState({
+            country: "Germany",
+            state: ""
+        });
+      
+        const countries = countriesData.map((country) => (
+            <option key={country.name} value={country.name}>
+                {country.name}
+            </option>
+        ));
+      
+        const states = countriesData.find(item => item.name === country)?.states.map((state) => (
+            <option key={state} value={state}>
+                {state}
+            </option>
+        ));
+      
+        function handleCountryChange(event: { target: { value: any; }; }) {
+            setData(data => ({ state: '', country: event.target.value }));
+        }
+      
+        function handleStateChange(event: { target: { value: any; }; }) {
+            setData(data => ({ ...data, state: event.target.value }));
+        }
+      
+        return (
+            <form onSubmit={() => console.log("Submitted")}>
+                <div>
+                    <select value={country} onChange={handleCountryChange}>
+                        {countries}
+                    </select>
+                </div>
+      
+                <div>
+                    <select value={state} onChange={handleStateChange}>
+                        {states}
+                    </select>
+                </div>
+                <input type="submit" />
+            </form>
+        );
+    }
+    
                 <table>
                     <tbody>
                         <tr>
@@ -210,53 +380,8 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
                         </tr>
                     </tbody>
                 </table>
-            </div>
-        </div> 
-    )
-/*
-    function Form() {
-        const [{ country, state }, setData] = useState({
-            country: "Germany",
-            state: ""
-        });
-      
-        const countries = countriesData.map((country) => (
-            <option key={country.name} value={country.name}>
-                {country.name}
-            </option>
-        ));
-      
-        const states = countriesData.find(item => item.name === country)?.states.map((state) => (
-            <option key={state} value={state}>
-                {state}
-            </option>
-        ));
-      
-        function handleCountryChange(event: { target: { value: any; }; }) {
-            setData(data => ({ state: '', country: event.target.value }));
-        }
-      
-        function handleStateChange(event: { target: { value: any; }; }) {
-            setData(data => ({ ...data, state: event.target.value }));
-        }
-      
-        return (
-            <form onSubmit={() => console.log("Submitted")}>
-                <div>
-                    <select value={country} onChange={handleCountryChange}>
-                        {countries}
-                    </select>
-                </div>
-      
-                <div>
-                    <select value={state} onChange={handleStateChange}>
-                        {states}
-                    </select>
-                </div>
-                <input type="submit" />
-            </form>
-        );
-    }*/
+    
+    */
 }
 
 
