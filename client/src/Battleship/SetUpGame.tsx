@@ -9,23 +9,25 @@ type SetUpGameProps = {
 
 export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
 
+    const player = 1;
+
     const [playMessage, setPlayMessage] = useState("Turn of " +gameState.players[0].name +".");
 
     const shipsData = [
         {
-          name: "The first ship, of length "+gameState.players[0].fleet.boats[0].length,
+          name: "1: A ship of length "+gameState.players[0].fleet.boats[0].length,
         },
         {
-          name: "The second ship, of length "+gameState.players[0].fleet.boats[1].length,
+          name: "2: The second ship, of length "+gameState.players[0].fleet.boats[1].length,
         },
         {
-          name: "The third ship, of length "+gameState.players[0].fleet.boats[2].length,
+          name: "3: The third ship, of length "+gameState.players[0].fleet.boats[2].length,
         },
         {
-          name: "The fourth ship, of length "+gameState.players[0].fleet.boats[3].length,
+          name: "4: The fourth ship, of length "+gameState.players[0].fleet.boats[3].length,
         },
         {
-          name: "The fifth ship, of length "+gameState.players[0].fleet.boats[4].length,
+          name: "5: The fifth ship, of length "+gameState.players[0].fleet.boats[4].length,
         }
     ];
       
@@ -35,12 +37,12 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
         </option>
     ));
 
-    const [ship, setData] = useState({
+    const [ship, setShipSelected] = useState({
         name: "The first ship, of length "+gameState.players[0].fleet.boats[0].length
     });
       
     function handleShipChange(event: { target: { value: any; }; }) {
-        setData(data => ({ state: '', ship: event.target.value }));
+        setShipSelected(data => ({ state: '', ship: event.target.value }));
     }
 
     const directionsData = [
@@ -64,12 +66,41 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
         </option>
     ));
 
-    const [direction, setDataDirection] = useState({
+    const [direction, setDirectionSelected] = useState({
         direction: "North"
     });
       
     function handleDirectionChange(event: { target: { value: any; }; }) {
-        setDataDirection(data => ({ state: '', direction: event.target.value }));
+        setDirectionSelected(data => ({ state: '', direction: event.target.value }));
+    }
+
+    async function placeShip(x: any,y: any) {
+        var shipIndex = parseInt(ship.name.charAt(0))-1;
+        try {
+            const response = await fetch('battleship/api/placeship', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({player,shipIndex,direction,x,y})
+            });
+
+            if (response.ok) {
+                const gameState = await response.json();
+                setGameState(gameState);
+                console.log(gameState);
+            } else {
+                console.error(response.statusText);
+            }
+        } 
+        catch (error) {
+            if (error instanceof Error) {
+                console.error(error.toString());
+            } else {
+                console.log('Unexpected error', error);
+            }
+        }
     }
 
     return (
@@ -88,7 +119,8 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
             <div className="column" id="map">
                 <div className ="total-btn-group">
                     <div className="btn-group">
-                        <button data-status={gameState.players[0].setUpMap[0][0].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[0][0].available}
+                        onClick={()=>placeShip(0,0)}></button>
                         <button data-status={gameState.players[0].setUpMap[1][0].available}></button>
                         <button data-status={gameState.players[0].setUpMap[2][0].available}></button>
                         <button data-status={gameState.players[0].setUpMap[3][0].available}></button>
