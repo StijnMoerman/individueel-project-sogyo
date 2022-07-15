@@ -4,8 +4,8 @@ public class Player {
     private Fleet fleet = new Fleet();
     boolean firstPlayer;
     private Player nextPlayer;
-    PlaceEntry[][] placeMap = new PlaceEntry[10][10];
-    GuessEntry[][] guessMap = new GuessEntry[10][10];
+    private PlaceEntry[][] placeMap = new PlaceEntry[10][10];
+    private GuessEntry[][] guessMap = new GuessEntry[10][10];
 
     public Player () {
         firstPlayer = true;

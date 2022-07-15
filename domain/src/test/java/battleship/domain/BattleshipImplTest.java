@@ -61,7 +61,7 @@ public class BattleshipImplTest {
     @Test
     public void placeMapStillEmpty() {
         BattleshipImpl Battleship = new BattleshipImpl();
-        PlaceEntry leftUpperPlaceEntryPlayerOne = Battleship.getPlayer(1).placeMap[0][0];
+        PlaceEntry leftUpperPlaceEntryPlayerOne = Battleship.getPlayer(1).getPlaceMap()[0][0];
         assertFalse(leftUpperPlaceEntryPlayerOne.getHasShip());
         assertNull(leftUpperPlaceEntryPlayerOne.getShip());
     }
@@ -69,7 +69,7 @@ public class BattleshipImplTest {
     @Test
     public void guessMapStillEmpty() {
         BattleshipImpl Battleship = new BattleshipImpl();
-        GuessEntry leftUpperGuessEntryPlayerOne = Battleship.getPlayer(1).guessMap[0][0];
+        GuessEntry leftUpperGuessEntryPlayerOne = Battleship.getPlayer(1).getGuessMap()[0][0];
         assertFalse(leftUpperGuessEntryPlayerOne.getGuessed());
         assertFalse(leftUpperGuessEntryPlayerOne.getHit());
     }
@@ -92,7 +92,7 @@ public class BattleshipImplTest {
     @Test
     public void testAssigningShips() {
         BattleshipImpl Battleship = new BattleshipImpl();
-        PlaceEntry leftUpperPlaceEntryPlayerOne = Battleship.getPlayer(1).placeMap[0][0];
+        PlaceEntry leftUpperPlaceEntryPlayerOne = Battleship.getPlayer(1).getPlaceMap()[0][0];
         Ship largestBoatPlayerOne = Battleship.getPlayer(1).getFleet().ships[0];
         leftUpperPlaceEntryPlayerOne.assignShip(largestBoatPlayerOne);
         assertTrue(leftUpperPlaceEntryPlayerOne.getHasShip());
@@ -102,8 +102,8 @@ public class BattleshipImplTest {
     @Test
     public void testGuessingShips() {
         BattleshipImpl Battleship = new BattleshipImpl();
-        PlaceEntry leftUpperPlaceEntryPlayerTwo = Battleship.getPlayer(2).placeMap[0][0];
-        GuessEntry leftUpperGuessEntryPlayerOne = Battleship.getPlayer(1).guessMap[0][0];
+        PlaceEntry leftUpperPlaceEntryPlayerTwo = Battleship.getPlayer(2).getPlaceMap()[0][0];
+        GuessEntry leftUpperGuessEntryPlayerOne = Battleship.getPlayer(1).getGuessMap()[0][0];
         Ship largestBoatPlayerOne = Battleship.getPlayer(2).getFleet().ships[0];
 
         leftUpperPlaceEntryPlayerTwo.assignShip(largestBoatPlayerOne);
@@ -117,7 +117,7 @@ public class BattleshipImplTest {
     public void testPlaceShipsWest() {
         BattleshipImpl Battleship = new BattleshipImpl();
         Battleship.getPlayer(1).placeShip(0,4,0,"West");
-        PlaceEntry leftUpperPlaceEntryPlayerOne = Battleship.getPlayer(1).placeMap[0][0];
+        PlaceEntry leftUpperPlaceEntryPlayerOne = Battleship.getPlayer(1).getPlaceMap()[0][0];
         Ship largestBoatPlayerOne = Battleship.getPlayer(1).getFleet().ships[0];
         assertTrue(leftUpperPlaceEntryPlayerOne.getHasShip());
         assertEquals(largestBoatPlayerOne,leftUpperPlaceEntryPlayerOne.getShip());
@@ -127,7 +127,7 @@ public class BattleshipImplTest {
     public void testPlaceShipsEast() {
         BattleshipImpl Battleship = new BattleshipImpl();
         Battleship.getPlayer(1).placeShip(0,0,0,"East");
-        PlaceEntry leftUpperPlaceEntryPlayerOne = Battleship.getPlayer(1).placeMap[0][0];
+        PlaceEntry leftUpperPlaceEntryPlayerOne = Battleship.getPlayer(1).getPlaceMap()[0][0];
         Ship largestBoatPlayerOne = Battleship.getPlayer(1).getFleet().ships[0];
         assertTrue(leftUpperPlaceEntryPlayerOne.getHasShip());
         assertEquals(largestBoatPlayerOne,leftUpperPlaceEntryPlayerOne.getShip());
@@ -137,7 +137,7 @@ public class BattleshipImplTest {
     public void testPlaceShipsNorth() {
         BattleshipImpl Battleship = new BattleshipImpl();
         Battleship.getPlayer(1).placeShip(0,0,4,"North");
-        PlaceEntry leftUpperPlaceEntryPlayerOne = Battleship.getPlayer(1).placeMap[0][0];
+        PlaceEntry leftUpperPlaceEntryPlayerOne = Battleship.getPlayer(1).getPlaceMap()[0][0];
         Ship largestBoatPlayerOne = Battleship.getPlayer(1).getFleet().ships[0];
         assertTrue(leftUpperPlaceEntryPlayerOne.getHasShip());
         assertEquals(largestBoatPlayerOne,leftUpperPlaceEntryPlayerOne.getShip());
@@ -147,7 +147,7 @@ public class BattleshipImplTest {
     public void testPlaceShipsSouth() {
         BattleshipImpl Battleship = new BattleshipImpl();
         Battleship.getPlayer(1).placeShip(0,0,0,"South");
-        PlaceEntry leftUpperPlaceEntryPlayerOne = Battleship.getPlayer(1).placeMap[0][0];
+        PlaceEntry leftUpperPlaceEntryPlayerOne = Battleship.getPlayer(1).getPlaceMap()[0][0];
         Ship largestBoatPlayerOne = Battleship.getPlayer(1).getFleet().ships[0];
         assertTrue(leftUpperPlaceEntryPlayerOne.getHasShip());
         assertEquals(largestBoatPlayerOne,leftUpperPlaceEntryPlayerOne.getShip());
