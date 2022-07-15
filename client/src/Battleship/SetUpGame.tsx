@@ -9,21 +9,80 @@ type SetUpGameProps = {
 
 export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
 
-    const [playMessage, setPlayMessage] = useState("Turn of " +gameState.players[0].name +" .");
+    const [playMessage, setPlayMessage] = useState("Turn of " +gameState.players[0].name +".");
+
+    const shipsData = [
+        {
+          name: "The first ship, of length "+gameState.players[0].fleet.boats[0].length,
+        },
+        {
+          name: "The second ship, of length "+gameState.players[0].fleet.boats[1].length,
+        },
+        {
+          name: "The third ship, of length "+gameState.players[0].fleet.boats[2].length,
+        },
+        {
+          name: "The fourth ship, of length "+gameState.players[0].fleet.boats[3].length,
+        },
+        {
+          name: "The fifth ship, of length "+gameState.players[0].fleet.boats[4].length,
+        }
+    ];
+      
+    const ships = shipsData.map((ship) => (
+        <option key={ship.name} value={ship.name}>
+            {ship.name}
+        </option>
+    ));
+
+    const [ship, setData] = useState({
+        name: "The first ship, of length "+gameState.players[0].fleet.boats[0].length
+    });
+      
+    function handleShipChange(event: { target: { value: any; }; }) {
+        setData(data => ({ state: '', ship: event.target.value }));
+    }
+
+    const directionsData = [
+        {
+          direction: "North",
+        },
+        {
+          direction: "East",
+        },
+        {
+          direction: "South",
+        },
+        {
+          direction: "West",
+        }
+    ];
+      
+    const directions = directionsData.map((direction) => (
+        <option key={direction.direction} value={direction.direction}>
+            {direction.direction}
+        </option>
+    ));
+
+    const [direction, setDataDirection] = useState({
+        direction: "North"
+    });
+      
+    function handleDirectionChange(event: { target: { value: any; }; }) {
+        setDataDirection(data => ({ state: '', direction: event.target.value }));
+    }
 
     return (
         <div className="row">
             <div className="column">
                 Hi! Welcome to Battleship! Time to set up your fleet! {playMessage}
                 <br></br>
-                Ships: 
-                <select name="ships" id="ship">
-                    <option value="" > Select ship to place </option>
+                Ships: <select value={ship.name} onChange={handleShipChange}>
+                    {ships}
                 </select>
                 <br></br>
-                Direction: 
-                <select name="directions" id="direction">
-                    <option value="" > Select direction to place the ship </option>
+                Direction: <select value={direction.direction} onChange={handleDirectionChange}>
+                    {directions}
                 </select>
             </div>
             <div className="column">
@@ -153,8 +212,51 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
                 </table>
             </div>
         </div> 
-
     )
+/*
+    function Form() {
+        const [{ country, state }, setData] = useState({
+            country: "Germany",
+            state: ""
+        });
+      
+        const countries = countriesData.map((country) => (
+            <option key={country.name} value={country.name}>
+                {country.name}
+            </option>
+        ));
+      
+        const states = countriesData.find(item => item.name === country)?.states.map((state) => (
+            <option key={state} value={state}>
+                {state}
+            </option>
+        ));
+      
+        function handleCountryChange(event: { target: { value: any; }; }) {
+            setData(data => ({ state: '', country: event.target.value }));
+        }
+      
+        function handleStateChange(event: { target: { value: any; }; }) {
+            setData(data => ({ ...data, state: event.target.value }));
+        }
+      
+        return (
+            <form onSubmit={() => console.log("Submitted")}>
+                <div>
+                    <select value={country} onChange={handleCountryChange}>
+                        {countries}
+                    </select>
+                </div>
+      
+                <div>
+                    <select value={state} onChange={handleStateChange}>
+                        {states}
+                    </select>
+                </div>
+                <input type="submit" />
+            </form>
+        );
+    }*/
 }
 
 
