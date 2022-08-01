@@ -22,7 +22,7 @@ export function Play({ gameState, setGameState }: PlayProps) {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({playerIndex: player,xEntry: xEntry,yEntry: yEntry})
+                body: JSON.stringify({xEntry: xEntry,yEntry: yEntry})
             });
 
             if (response.ok) {
@@ -39,6 +39,12 @@ export function Play({ gameState, setGameState }: PlayProps) {
             } else {
                 console.log('Unexpected error', error);
             }
+        }
+        if (gameState.players[0].hasTurn) {
+            setPlayer(1);
+        }
+        else {
+            setPlayer(2);
         }
     }
 
