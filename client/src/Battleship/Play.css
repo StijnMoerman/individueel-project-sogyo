@@ -1,1 +1,79 @@
 /** Add some styles */
+/** Add some styles */
+
+table {
+    table-layout: fixed;
+    height: 600px;
+    width: 600px;
+    background-color: aqua;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th,td {
+    border: 1px solid black;
+}
+
+.row {
+    display: flex;
+}
+
+.column {
+    float: left;
+    padding: 10px;
+}
+
+#map {
+    width: 60%
+}
+
+#options {
+    width: 40%
+}
+
+.btn-group button {
+  border: 1px solid white; 
+  color: white; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: left; /* Float the buttons side by side */
+  width: 64px;
+  height: 64px;
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.btn-group button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+.total-btn-group div:not(:last-child) button {
+  border-bottom: none; /* Prevent double borders */
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: royalblue;
+}
+
+[data-status = "unknown"] {
+    background-color: aqua;
+}
+
+[data-status = "miss"] {
+    background-color: darkblue;
+}
+
+[data-status = "hit"] {
+    background-color: orangered;
+}
+
+[data-status = "sunk"] {
+    background-color: black;
+}
