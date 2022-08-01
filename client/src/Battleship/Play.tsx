@@ -15,7 +15,31 @@ export function Play({ gameState, setGameState }: PlayProps) {
 
 
     async function hitSpot (xEntry: number, yEntry: number) {
-        //.............
+        try {
+            const response = await fetch('battleship/api/hitspot', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({playerIndex: player,xEntry: xEntry,yEntry: yEntry})
+            });
+
+            if (response.ok) {
+                const gameState = await response.json();
+                setGameState(gameState);
+                console.log(gameState);
+            } else {
+                console.error(response.statusText);
+            }
+        } 
+        catch (error) {
+            if (error instanceof Error) {
+                console.error(error.toString());
+            } else {
+                console.log('Unexpected error', error);
+            }
+        }
     }
 
     return (
