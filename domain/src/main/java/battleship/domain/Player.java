@@ -2,14 +2,14 @@ package battleship.domain;
 
 public class Player {
     private Fleet fleet = new Fleet();
-    boolean firstPlayer;
     private Player nextPlayer;
     private PlaceEntry[][] placeMap = new PlaceEntry[10][10];
     private GuessEntry[][] guessMap = new GuessEntry[10][10];
+    private boolean hasTurn;
 
     public Player () {
-        firstPlayer = true;
         nextPlayer = new Player(this);
+        hasTurn = true;
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 placeMap[i][j] = new PlaceEntry();
@@ -19,8 +19,8 @@ public class Player {
     }
 
     private Player (Player firstPlayer) {
-        this.firstPlayer = false;
         nextPlayer = firstPlayer;
+        hasTurn = false;
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 placeMap[i][j] = new PlaceEntry();
@@ -49,12 +49,28 @@ public class Player {
         return guessMap;
     }
 
+    public boolean getHasTurn() {
+        return hasTurn;
+    }
+
+    public void getTurn() {
+        hasTurn = true;
+    }
+
     public void doTurn (int xEntry, int yEntry) {
         guessMap[xEntry][yEntry].entryGuessed();
         if (nextPlayer.placeMap[xEntry][yEntry].getHasShip()) {
             guessMap[xEntry][yEntry].shipHit();
             nextPlayer.placeMap[xEntry][yEntry].getShip().getHit();
             nextPlayer.getFleet().setDestroyed();
+            if (nextPlayer.placeMap[xEntry][yEntry].getShip().isDestroyed()) {
+                this.hasTurn = false;
+                nextPlayer.getTurn();
+            }
+        }
+        else {
+            this.hasTurn = false;
+            nextPlayer.getTurn();
         }
     }
 
