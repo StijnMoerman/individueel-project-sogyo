@@ -38,6 +38,12 @@ public class StartBattleshipTest {
         assertFalse(players[1].getHasTurn());
         assertEquals("player1", players[0].getType());
         assertEquals("player2", players[1].getType());
+        assertFalse(players[0].getFleet().getPlaced());
+        assertFalse(players[0].getFleet().getBoats()[0].getPlaced());
+        assertEquals(5,players[0].getFleet().getBoats()[0].getLength());
+        assertTrue(players[0].getSetUpMap()[0][0].getAvailable());
+        assertFalse(players[0].getSetUpMap()[0][0].getHasBoat());
+        assertEquals("unknown", players[0].getGuessMap()[0][0].getStatus());
     }
 
     @Test
