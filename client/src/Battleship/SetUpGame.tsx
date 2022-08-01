@@ -13,6 +13,8 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
 
     const [playMessage, setPlayMessage] = useState("Turn of " +gameState.players[0].name +".");
 
+    const [placeShipMessage, setPlaceShipMessage] = useState("Pick a ship and a direction and then click on a cell in the map on the right to place your ship.");
+
     const shipsData = [
         {
           name: "1: A ship of length "+gameState.players[0].fleet.boats[0].length,
@@ -44,6 +46,7 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
     function handleShipChange(event: { target: { value: any; }; }) {
         setShipSelected(data => ({ name: event.target.value }));
         console.log(ship);
+        setPlaceShipMessage("");
     }
 
     const directionsData = [
@@ -82,29 +85,34 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
         console.log(direction);
         console.log(x);
         console.log(y);
-        try {
-            const response = await fetch('battleship/api/placeship', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({playerIndex: player,shipIndex: shipIndex,direction: direction,xEntry: x,yEntry: y})
-            });
+        if (gameState.players[0].fleet.boats[shipIndex].placed) {
+            setPlaceShipMessage("This ship is already placed. This cannot be made undone (yet). Choose another ship that is not placed yet.");
+        }
+        else {
+            try {
+                const response = await fetch('battleship/api/placeship', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({playerIndex: player,shipIndex: shipIndex,direction: direction,xEntry: x,yEntry: y})
+                });
 
-            if (response.ok) {
-                const gameState = await response.json();
-                setGameState(gameState);
-                console.log(gameState);
-            } else {
-                console.error(response.statusText);
-            }
-        } 
-        catch (error) {
-            if (error instanceof Error) {
-                console.error(error.toString());
-            } else {
-                console.log('Unexpected error', error);
+                if (response.ok) {
+                    const gameState = await response.json();
+                    setGameState(gameState);
+                    console.log(gameState);
+                } else {
+                    console.error(response.statusText);
+                }
+            } 
+            catch (error) {
+                if (error instanceof Error) {
+                    console.error(error.toString());
+                } else {
+                    console.log('Unexpected error', error);
+                }
             }
         }
     }
@@ -121,6 +129,8 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
                 Direction: <select value={direction} onChange={handleDirectionChange}>
                     {directions}
                 </select>
+                <br></br>
+                {placeShipMessage}
             </div>
             <div className="column" id="map">
                 <div className ="total-btn-group">
