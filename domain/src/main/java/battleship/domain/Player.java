@@ -65,24 +65,28 @@ public class Player {
                 placeMap[xEntry][yEntry-i].assignShip(getShip(shipEntry));
             }
             placedShip.getPlaced();
+            fleet.setPlaced();
         }
         else if (direction.charAt(0) == 'S' && 10 - yEntry >= placedShip.getLength()) {
             for (int i = 0; i < placedShip.getLength(); i++) {
                 placeMap[xEntry][yEntry+i].assignShip(getShip(shipEntry));
             }
             placedShip.getPlaced();
+            fleet.setPlaced();
         }
         else if (direction.charAt(0) == 'W' && xEntry + 1 >= placedShip.getLength()) {
             for (int i = 0; i < placedShip.getLength(); i++) {
                 placeMap[xEntry-i][yEntry].assignShip(getShip(shipEntry));
             }
             placedShip.getPlaced();
+            fleet.setPlaced();
         }
         else if (direction.charAt(0) == 'E' && 10 - xEntry >= placedShip.getLength()) {
             for (int i = 0; i < placedShip.getLength(); i++) {
                 placeMap[xEntry+i][yEntry].assignShip(getShip(shipEntry));
             }
             placedShip.getPlaced();
+            fleet.setPlaced();
         }
         else {
             throw new ArithmeticException("Invalid placement of boats with direction."
