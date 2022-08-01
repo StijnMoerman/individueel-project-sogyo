@@ -105,7 +105,7 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
                     console.log(gameState);
                     if (gameState.players[player-1].fleet.placed) {
                         setPlayer(2);
-                        setPlayMessage("Turn of " +gameState.players[player-1].name +".")
+                        setPlayMessage("Turn of " +gameState.players[1].name +".");
                     }
                 } else {
                     console.error(response.statusText);
@@ -119,6 +119,7 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
                 }
             }
         }
+        setPlayMessage("Turn of " +gameState.players[player-1].name +".");
     }
 
     return (
