@@ -154,7 +154,32 @@ public class BattleshipImplTest {
     }
 
     @Test
-    public void fleetPlaceWhenAllShipsPlaced() {
+    public void testPlaceShipsIncorrectly() {
+        BattleshipImpl Battleship = new BattleshipImpl();
+        try {
+            Battleship.getPlayer(1).placeShip(0,0,0,"North");
+        } catch (ArithmeticException e) {
+            e.printStackTrace();
+        }
+        try {
+            Battleship.getPlayer(1).placeShip(0,0,0,"West");
+        } catch (ArithmeticException e) {
+            e.printStackTrace();
+        }
+        try {
+            Battleship.getPlayer(1).placeShip(0,9,9,"South");
+        } catch (ArithmeticException e) {
+            e.printStackTrace();
+        }
+        try {
+            Battleship.getPlayer(1).placeShip(0,9,9,"East");
+        } catch (ArithmeticException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void fleetPlacedWhenAllShipsPlaced() {
         BattleshipImpl Battleship = new BattleshipImpl();
         Battleship.getPlayer(1).placeShip(0,0,0,"South");
         Battleship.getPlayer(1).placeShip(1,1,0,"South");
