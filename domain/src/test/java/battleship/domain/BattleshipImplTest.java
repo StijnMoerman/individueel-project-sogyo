@@ -153,6 +153,17 @@ public class BattleshipImplTest {
         assertEquals(largestBoatPlayerOne,leftUpperPlaceEntryPlayerOne.getShip());
     }
 
+    @Test
+    public void fleetPlaceWhenAllShipsPlaced() {
+        BattleshipImpl Battleship = new BattleshipImpl();
+        Battleship.getPlayer(1).placeShip(0,0,0,"South");
+        Battleship.getPlayer(1).placeShip(1,1,0,"South");
+        Battleship.getPlayer(1).placeShip(2,2,0,"South");
+        Battleship.getPlayer(1).placeShip(3,3,0,"South");
+        Battleship.getPlayer(1).placeShip(4,4,0,"South");
+        assertTrue(Battleship.getPlayer(1).getFleet().isPlaced());
+    }
+
 
 
 }
