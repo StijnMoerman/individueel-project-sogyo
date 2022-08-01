@@ -9,7 +9,7 @@ type PlayProps = {
 
 export function Play({ gameState, setGameState }: PlayProps) {
 
-    const [playMessage, setPlayMessage] = useState("Turn of " +gameState.players[0].name);
+    const [playMessage, setPlayMessage] = useState("Turn of " +gameState.players[0].name +". ");
     const [hitOrMissMessage, setHitOrMissMessage] = useState("");
     const [player, setPlayer] = useState(1);
 
