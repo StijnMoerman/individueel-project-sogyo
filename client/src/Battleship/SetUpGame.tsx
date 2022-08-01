@@ -38,11 +38,12 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
     ));
 
     const [ship, setShipSelected] = useState({
-        name: "The first ship, of length "+gameState.players[0].fleet.boats[0].length
+        name: "1: The first ship, of length "+gameState.players[0].fleet.boats[0].length
     });
       
     function handleShipChange(event: { target: { value: any; }; }) {
-        setShipSelected(data => ({ state: '', ship: event.target.value }));
+        setShipSelected(data => ({ name: event.target.value }));
+        console.log(ship);
     }
 
     const directionsData = [
@@ -66,16 +67,21 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
         </option>
     ));
 
-    const [direction, setDirectionSelected] = useState({
-        direction: "North"
-    });
+    const [direction, setDirectionSelected] = useState(
+        "North"
+    );
       
     function handleDirectionChange(event: { target: { value: any; }; }) {
-        setDirectionSelected(data => ({ state: '', direction: event.target.value }));
+        setDirectionSelected(data => (event.target.value ));
     }
 
     async function placeShip(x: any,y: any) {
         var shipIndex = parseInt(ship.name.charAt(0))-1;
+        console.log(player);
+        console.log(shipIndex);
+        console.log(direction);
+        console.log(x);
+        console.log(y);
         try {
             const response = await fetch('battleship/api/placeship', {
                 method: 'POST',
@@ -83,7 +89,7 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({player,shipIndex,direction,x,y})
+                body: JSON.stringify({playerIndex: player,shipIndex: shipIndex,direction: direction,xEntry: x,yEntry: y})
             });
 
             if (response.ok) {
@@ -112,7 +118,7 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
                     {ships}
                 </select>
                 <br></br>
-                Direction: <select value={direction.direction} onChange={handleDirectionChange}>
+                Direction: <select value={direction} onChange={handleDirectionChange}>
                     {directions}
                 </select>
             </div>
@@ -121,123 +127,222 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
                     <div className="btn-group">
                         <button data-status={gameState.players[0].setUpMap[0][0].available}
                         onClick={()=>placeShip(0,0)}></button>
-                        <button data-status={gameState.players[0].setUpMap[1][0].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[2][0].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[3][0].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[4][0].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[5][0].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[6][0].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[7][0].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[8][0].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[9][0].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[1][0].available} 
+                        onClick={()=>placeShip(1,0)}></button>
+                        <button data-status={gameState.players[0].setUpMap[2][0].available}
+                        onClick={()=>placeShip(2,0)}></button>
+                        <button data-status={gameState.players[0].setUpMap[3][0].available}
+                        onClick={()=>placeShip(3,0)}></button>
+                        <button data-status={gameState.players[0].setUpMap[4][0].available}
+                        onClick={()=>placeShip(4,0)}></button>
+                        <button data-status={gameState.players[0].setUpMap[5][0].available}
+                        onClick={()=>placeShip(5,0)}></button>
+                        <button data-status={gameState.players[0].setUpMap[6][0].available}
+                        onClick={()=>placeShip(6,0)}></button>
+                        <button data-status={gameState.players[0].setUpMap[7][0].available}
+                        onClick={()=>placeShip(7,0)}></button>
+                        <button data-status={gameState.players[0].setUpMap[8][0].available}
+                        onClick={()=>placeShip(8,0)}></button>
+                        <button data-status={gameState.players[0].setUpMap[9][0].available}
+                        onClick={()=>placeShip(9,0)}></button>
                     </div>
                     <div className="btn-group">
-                        <button data-status={gameState.players[0].setUpMap[0][1].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[1][1].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[2][1].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[3][1].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[4][1].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[5][1].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[6][1].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[7][1].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[8][1].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[9][1].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[0][1].available}
+                        onClick={()=>placeShip(0,1)}></button>
+                        <button data-status={gameState.players[0].setUpMap[1][1].available}
+                        onClick={()=>placeShip(1,1)}></button>
+                        <button data-status={gameState.players[0].setUpMap[2][1].available}
+                        onClick={()=>placeShip(2,1)}></button>
+                        <button data-status={gameState.players[0].setUpMap[3][1].available}
+                        onClick={()=>placeShip(3,1)}></button>
+                        <button data-status={gameState.players[0].setUpMap[4][1].available}
+                        onClick={()=>placeShip(4,1)}></button>
+                        <button data-status={gameState.players[0].setUpMap[5][1].available}
+                        onClick={()=>placeShip(5,1)}></button>
+                        <button data-status={gameState.players[0].setUpMap[6][1].available}
+                        onClick={()=>placeShip(6,1)}></button>
+                        <button data-status={gameState.players[0].setUpMap[7][1].available}
+                        onClick={()=>placeShip(7,1)}></button>
+                        <button data-status={gameState.players[0].setUpMap[8][1].available}
+                        onClick={()=>placeShip(8,1)}></button>
+                        <button data-status={gameState.players[0].setUpMap[9][1].available}
+                        onClick={()=>placeShip(9,1)}></button>
                     </div>
                     <div className="btn-group">
-                        <button data-status={gameState.players[0].setUpMap[0][2].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[1][2].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[2][2].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[3][2].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[4][2].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[5][2].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[6][2].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[7][2].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[8][2].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[9][2].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[0][2].available}
+                        onClick={()=>placeShip(0,2)}></button>
+                        <button data-status={gameState.players[0].setUpMap[1][2].available}
+                        onClick={()=>placeShip(1,2)}></button>
+                        <button data-status={gameState.players[0].setUpMap[2][2].available}
+                        onClick={()=>placeShip(2,2)}></button>
+                        <button data-status={gameState.players[0].setUpMap[3][2].available}
+                        onClick={()=>placeShip(3,2)}></button>
+                        <button data-status={gameState.players[0].setUpMap[4][2].available}
+                        onClick={()=>placeShip(4,2)}></button>
+                        <button data-status={gameState.players[0].setUpMap[5][2].available}
+                        onClick={()=>placeShip(5,2)}></button>
+                        <button data-status={gameState.players[0].setUpMap[6][2].available}
+                        onClick={()=>placeShip(6,2)}></button>
+                        <button data-status={gameState.players[0].setUpMap[7][2].available}
+                        onClick={()=>placeShip(7,2)}></button>
+                        <button data-status={gameState.players[0].setUpMap[8][2].available}
+                        onClick={()=>placeShip(8,2)}></button>
+                        <button data-status={gameState.players[0].setUpMap[9][2].available}
+                        onClick={()=>placeShip(9,2)}></button>
                     </div>
                     <div className="btn-group">
-                        <button data-status={gameState.players[0].setUpMap[0][3].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[1][3].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[2][3].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[3][3].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[4][3].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[5][3].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[6][3].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[7][3].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[8][3].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[9][3].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[0][3].available}
+                        onClick={()=>placeShip(0,3)}></button>
+                        <button data-status={gameState.players[0].setUpMap[1][3].available}
+                        onClick={()=>placeShip(1,3)}></button>
+                        <button data-status={gameState.players[0].setUpMap[2][3].available}
+                        onClick={()=>placeShip(2,3)}></button>
+                        <button data-status={gameState.players[0].setUpMap[3][3].available}
+                        onClick={()=>placeShip(3,3)}></button>
+                        <button data-status={gameState.players[0].setUpMap[4][3].available}
+                        onClick={()=>placeShip(4,3)}></button>
+                        <button data-status={gameState.players[0].setUpMap[5][3].available}
+                        onClick={()=>placeShip(5,3)}></button>
+                        <button data-status={gameState.players[0].setUpMap[6][3].available}
+                        onClick={()=>placeShip(6,3)}></button>
+                        <button data-status={gameState.players[0].setUpMap[7][3].available}
+                        onClick={()=>placeShip(7,3)}></button>
+                        <button data-status={gameState.players[0].setUpMap[8][3].available}
+                        onClick={()=>placeShip(8,3)}></button>
+                        <button data-status={gameState.players[0].setUpMap[9][3].available}
+                        onClick={()=>placeShip(9,3)}></button>
                     </div>
                     <div className="btn-group">
-                        <button data-status={gameState.players[0].setUpMap[0][4].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[1][4].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[2][4].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[3][4].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[4][4].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[5][4].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[6][4].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[7][4].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[8][4].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[9][4].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[0][4].available}
+                        onClick={()=>placeShip(0,4)}></button>
+                        <button data-status={gameState.players[0].setUpMap[1][4].available}
+                        onClick={()=>placeShip(1,4)}></button>
+                        <button data-status={gameState.players[0].setUpMap[2][4].available}
+                        onClick={()=>placeShip(2,4)}></button>
+                        <button data-status={gameState.players[0].setUpMap[3][4].available}
+                        onClick={()=>placeShip(3,4)}></button>
+                        <button data-status={gameState.players[0].setUpMap[4][4].available}
+                        onClick={()=>placeShip(4,4)}></button>
+                        <button data-status={gameState.players[0].setUpMap[5][4].available}
+                        onClick={()=>placeShip(5,4)}></button>
+                        <button data-status={gameState.players[0].setUpMap[6][4].available}
+                        onClick={()=>placeShip(6,4)}></button>
+                        <button data-status={gameState.players[0].setUpMap[7][4].available}
+                        onClick={()=>placeShip(7,4)}></button>
+                        <button data-status={gameState.players[0].setUpMap[8][4].available}
+                        onClick={()=>placeShip(8,4)}></button>
+                        <button data-status={gameState.players[0].setUpMap[9][4].available}
+                        onClick={()=>placeShip(9,4)}></button>
                     </div>
                     <div className="btn-group">
-                        <button data-status={gameState.players[0].setUpMap[0][5].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[1][5].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[2][5].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[3][5].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[4][5].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[5][5].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[6][5].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[7][5].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[8][5].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[9][5].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[0][5].available}
+                        onClick={()=>placeShip(0,5)}></button>
+                        <button data-status={gameState.players[0].setUpMap[1][5].available}
+                        onClick={()=>placeShip(1,5)}></button>
+                        <button data-status={gameState.players[0].setUpMap[2][5].available}
+                        onClick={()=>placeShip(2,5)}></button>
+                        <button data-status={gameState.players[0].setUpMap[3][5].available}
+                        onClick={()=>placeShip(3,5)}></button>
+                        <button data-status={gameState.players[0].setUpMap[4][5].available}
+                        onClick={()=>placeShip(4,5)}></button>
+                        <button data-status={gameState.players[0].setUpMap[5][5].available}
+                        onClick={()=>placeShip(5,5)}></button>
+                        <button data-status={gameState.players[0].setUpMap[6][5].available}
+                        onClick={()=>placeShip(6,5)}></button>
+                        <button data-status={gameState.players[0].setUpMap[7][5].available}
+                        onClick={()=>placeShip(7,5)}></button>
+                        <button data-status={gameState.players[0].setUpMap[8][5].available}
+                        onClick={()=>placeShip(8,5)}></button>
+                        <button data-status={gameState.players[0].setUpMap[9][5].available}
+                        onClick={()=>placeShip(9,5)}></button>
                     </div>
                     <div className="btn-group">
-                        <button data-status={gameState.players[0].setUpMap[0][6].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[1][6].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[2][6].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[3][6].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[4][6].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[5][6].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[6][6].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[7][6].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[8][6].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[9][6].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[0][6].available}
+                        onClick={()=>placeShip(0,6)}></button>
+                        <button data-status={gameState.players[0].setUpMap[1][6].available}
+                        onClick={()=>placeShip(1,6)}></button>
+                        <button data-status={gameState.players[0].setUpMap[2][6].available}
+                        onClick={()=>placeShip(2,6)}></button>
+                        <button data-status={gameState.players[0].setUpMap[3][6].available}
+                        onClick={()=>placeShip(3,6)}></button>
+                        <button data-status={gameState.players[0].setUpMap[4][6].available}
+                        onClick={()=>placeShip(4,6)}></button>
+                        <button data-status={gameState.players[0].setUpMap[5][6].available}
+                        onClick={()=>placeShip(5,6)}></button>
+                        <button data-status={gameState.players[0].setUpMap[6][6].available}
+                        onClick={()=>placeShip(6,6)}></button>
+                        <button data-status={gameState.players[0].setUpMap[7][6].available}
+                        onClick={()=>placeShip(7,6)}></button>
+                        <button data-status={gameState.players[0].setUpMap[8][6].available}
+                        onClick={()=>placeShip(8,6)}></button>
+                        <button data-status={gameState.players[0].setUpMap[9][6].available}
+                        onClick={()=>placeShip(9,6)}></button>
                     </div>
                     <div className="btn-group">
-                        <button data-status={gameState.players[0].setUpMap[0][7].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[1][7].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[2][7].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[3][7].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[4][7].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[5][7].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[6][7].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[7][7].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[8][7].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[9][7].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[0][7].available}
+                        onClick={()=>placeShip(0,7)}></button>
+                        <button data-status={gameState.players[0].setUpMap[1][7].available}
+                        onClick={()=>placeShip(1,7)}></button>
+                        <button data-status={gameState.players[0].setUpMap[2][7].available}
+                        onClick={()=>placeShip(2,7)}></button>
+                        <button data-status={gameState.players[0].setUpMap[3][7].available}
+                        onClick={()=>placeShip(3,7)}></button>
+                        <button data-status={gameState.players[0].setUpMap[4][7].available}
+                        onClick={()=>placeShip(4,7)}></button>
+                        <button data-status={gameState.players[0].setUpMap[5][7].available}
+                        onClick={()=>placeShip(5,7)}></button>
+                        <button data-status={gameState.players[0].setUpMap[6][7].available}
+                        onClick={()=>placeShip(6,7)}></button>
+                        <button data-status={gameState.players[0].setUpMap[7][7].available}
+                        onClick={()=>placeShip(7,7)}></button>
+                        <button data-status={gameState.players[0].setUpMap[8][7].available}
+                        onClick={()=>placeShip(8,7)}></button>
+                        <button data-status={gameState.players[0].setUpMap[9][7].available}
+                        onClick={()=>placeShip(9,7)}></button>
                     </div>
                     <div className="btn-group">
-                        <button data-status={gameState.players[0].setUpMap[0][8].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[1][8].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[2][8].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[3][8].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[4][8].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[5][8].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[6][8].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[7][8].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[8][8].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[9][8].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[0][8].available}
+                        onClick={()=>placeShip(0,8)}></button>
+                        <button data-status={gameState.players[0].setUpMap[1][8].available}
+                        onClick={()=>placeShip(1,8)}></button>
+                        <button data-status={gameState.players[0].setUpMap[2][8].available}
+                        onClick={()=>placeShip(2,8)}></button>
+                        <button data-status={gameState.players[0].setUpMap[3][8].available}
+                        onClick={()=>placeShip(3,8)}></button>
+                        <button data-status={gameState.players[0].setUpMap[4][8].available}
+                        onClick={()=>placeShip(4,8)}></button>
+                        <button data-status={gameState.players[0].setUpMap[5][8].available}
+                        onClick={()=>placeShip(5,8)}></button>
+                        <button data-status={gameState.players[0].setUpMap[6][8].available}
+                        onClick={()=>placeShip(6,8)}></button>
+                        <button data-status={gameState.players[0].setUpMap[7][8].available}
+                        onClick={()=>placeShip(7,8)}></button>
+                        <button data-status={gameState.players[0].setUpMap[8][8].available}
+                        onClick={()=>placeShip(8,8)}></button>
+                        <button data-status={gameState.players[0].setUpMap[9][8].available}
+                        onClick={()=>placeShip(9,8)}></button>
                     </div>
                     <div className="btn-group">
-                        <button data-status={gameState.players[0].setUpMap[0][9].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[1][9].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[2][9].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[3][9].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[4][9].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[5][9].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[6][9].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[7][9].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[8][9].available}></button>
-                        <button data-status={gameState.players[0].setUpMap[9][9].available}></button>
+                        <button data-status={gameState.players[0].setUpMap[0][9].available}
+                        onClick={()=>placeShip(0,9)}></button>
+                        <button data-status={gameState.players[0].setUpMap[1][9].available}
+                        onClick={()=>placeShip(1,9)}></button>
+                        <button data-status={gameState.players[0].setUpMap[2][9].available}
+                        onClick={()=>placeShip(2,9)}></button>
+                        <button data-status={gameState.players[0].setUpMap[3][9].available}
+                        onClick={()=>placeShip(3,9)}></button>
+                        <button data-status={gameState.players[0].setUpMap[4][9].available}
+                        onClick={()=>placeShip(4,9)}></button>
+                        <button data-status={gameState.players[0].setUpMap[5][9].available}
+                        onClick={()=>placeShip(5,9)}></button>
+                        <button data-status={gameState.players[0].setUpMap[6][9].available}
+                        onClick={()=>placeShip(6,9)}></button>
+                        <button data-status={gameState.players[0].setUpMap[7][9].available}
+                        onClick={()=>placeShip(7,9)}></button>
+                        <button data-status={gameState.players[0].setUpMap[8][9].available}
+                        onClick={()=>placeShip(8,9)}></button>
+                        <button data-status={gameState.players[0].setUpMap[9][9].available}
+                        onClick={()=>placeShip(9,9)}></button>
                     </div>
                 </div>
             </div>

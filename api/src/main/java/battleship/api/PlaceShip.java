@@ -19,19 +19,19 @@ public class PlaceShip {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response placeship(
 			@Context HttpServletRequest request, 
-			int playerIndex,
-            int shipIndex,
-            String direction,
-            int xEntry,
-            int yEntry) {
+			PlaceShipInput placeShipInput) {
 
-        
+        int playerIndex = placeShipInput.getPlayerIndex();
+        int shipIndex = placeShipInput.getShipIndex();
+        String direction = placeShipInput.getDirection();
+        int xEntry = placeShipInput.getxEntry();
+        int yEntry = placeShipInput.getyEntry();
         HttpSession session = request.getSession(true);
         BattleshipImpl battleship = (BattleshipImpl) session.getAttribute("battleship");
         
         battleship.getPlayer(playerIndex).placeShip(shipIndex, xEntry, yEntry, direction);
         session.setAttribute("battleship", battleship);
-
+        
         String namePlayer1 = (String)session.getAttribute("player1");
         String namePlayer2 = (String)session.getAttribute("player2");
 		var output = new Battleship(battleship, namePlayer1, namePlayer2);
