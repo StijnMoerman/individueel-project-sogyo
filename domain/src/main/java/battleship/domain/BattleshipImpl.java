@@ -8,6 +8,18 @@ public class BattleshipImpl implements Battleship {
         
     }
 
+    private void setPlayerOnTurn () {
+        if (!playerOnTurn.getHasTurn()) {
+            playerOnTurn = playerOnTurn.getNextPlayer();
+        }
+    }
+
+    @Override
+    public void playerDoesTurn (int xEntry, int yEntry) {
+        playerOnTurn.doTurn(xEntry, yEntry);
+        setPlayerOnTurn();
+    }
+
     @Override
     public Player getPlayer (int player) {
         if (player == 1) {

@@ -22,14 +22,13 @@ public class HitSpot {
 			@Context HttpServletRequest request, 
 			HitSpotInput hitSpotInput) {
 
-        int playerIndex = hitSpotInput.getPlayerIndex();
         int xEntry = hitSpotInput.getxEntry();
         int yEntry = hitSpotInput.getyEntry();
 
         HttpSession session = request.getSession(true);
         BattleshipImpl battleship = (BattleshipImpl) session.getAttribute("battleship");
         
-        battleship.getPlayer(playerIndex).doTurn(xEntry, yEntry);
+        battleship.playerDoesTurn(xEntry, yEntry);
         session.setAttribute("battleship", battleship);
         
         String namePlayer1 = (String)session.getAttribute("player1");
