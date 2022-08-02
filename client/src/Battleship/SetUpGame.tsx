@@ -15,6 +15,8 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
 
     const [placeShipMessage, setPlaceShipMessage] = useState("Pick a ship and a direction and then click on a cell in the map on the right to place your ship.");
 
+    const confirmButton = useRef<HTMLButtonElement>(null);
+
     const shipsData = [
         {
           name: "1: A ship of length "+gameState.players[player-1].fleet.boats[0].length,
@@ -104,8 +106,9 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
                     setGameState(gameState);
                     console.log(gameState);
                     if (gameState.players[player-1].fleet.placed) {
-                        setPlayer(2);
-                        setPlayMessage("Turn of " +gameState.players[1].name +".");
+                        if (confirmButton.current != null) {
+                            confirmButton.current.style.display = "inline";
+                        }
                     }
                 } else {
                     console.error(response.statusText);
@@ -119,7 +122,11 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
                 }
             }
         }
-        setPlayMessage("Turn of " +gameState.players[player-1].name +".");
+    }
+
+    async function confirmPlacement() {
+        setPlayer(2);
+        setPlayMessage("Turn of " +gameState.players[1].name +".");
     }
 
     return (
@@ -136,6 +143,9 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
                 </select>
                 <br></br>
                 {placeShipMessage}
+                <button className="confirm" ref={confirmButton}
+                            style={{display: "none"}} onClick={()=>confirmPlacement()}> Confirm </button>
+
             </div>
             <div className="column" id="map">
                 <div className ="total-btn-group">
