@@ -23,6 +23,7 @@ public class StartBattleshipTest {
         var entity = (Battleship)response.getEntity();
         var gameState = entity.getGameStatus();
         assertFalse(gameState.getEndOfGame());
+        assertFalse(gameState.getEndOfSetUp());
         assertNull(gameState.getWinner());
     }
 
