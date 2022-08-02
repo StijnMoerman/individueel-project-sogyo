@@ -18,13 +18,15 @@ public class Confirm {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response confirm(
-			@Context HttpServletRequest request) {
+			@Context HttpServletRequest request,
+            boolean endOfSetUp) {
 
 
         HttpSession session = request.getSession(true);
         BattleshipImpl battleship = (BattleshipImpl) session.getAttribute("battleship");
-        
-        battleship.confirmEndOfSetUp();
+        if (endOfSetUp) {
+            battleship.confirmEndOfSetUp();
+        }
         session.setAttribute("battleship", battleship);
         
         String namePlayer1 = (String)session.getAttribute("player1");

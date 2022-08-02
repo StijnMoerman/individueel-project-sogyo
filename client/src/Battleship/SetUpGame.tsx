@@ -132,14 +132,17 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
                 confirmButton.current.style.display = "none";
             }
         }
+        
         else {
+            var endOfSetUp = true;
             try {
                 const response = await fetch('battleship/api/confirm', {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
-                    }
+                    },
+                    body: JSON.stringify(endOfSetUp)
                 });
 
                 if (response.ok) {
