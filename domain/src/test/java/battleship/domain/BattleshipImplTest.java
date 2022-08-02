@@ -16,6 +16,7 @@ public class BattleshipImplTest {
     public void beginGameNotEnd() {
         BattleshipImpl Battleship = new BattleshipImpl();
         assertFalse( Battleship.isEndOfGame());
+        assertFalse( Battleship.isEndOfSetUp());
     }
 
     @Test
@@ -249,6 +250,28 @@ public class BattleshipImplTest {
         assertTrue(Battleship.getPlayer(2).getFleet().isDestroyed());
         assertTrue(Battleship.isEndOfGame());
         assertEquals(1,Battleship.getWinner());
+    }
+
+    @Test
+    public void testTurnSwitch() {
+        BattleshipImpl Battleship = new BattleshipImpl();
+        Battleship.getPlayer(2).placeShip(0,0,0,"South");
+        Battleship.getPlayer(2).placeShip(1,1,0,"South");
+        Battleship.getPlayer(2).placeShip(2,2,0,"South");
+        Battleship.getPlayer(2).placeShip(3,3,0,"South");
+        Battleship.getPlayer(2).placeShip(4,4,0,"South");
+        assertTrue(Battleship.isPlayersTurn(1));
+        Battleship.playerDoesTurn(0,0);
+        assertTrue(Battleship.isPlayersTurn(1));
+        Battleship.playerDoesTurn(7,9);
+        assertTrue(Battleship.isPlayersTurn(2));
+    }
+
+    @Test
+    public void testEndOfSetUp() {
+        BattleshipImpl Battleship = new BattleshipImpl();
+        Battleship.confirmEndOfSetUp();
+        assertTrue(Battleship.isEndOfSetUp());
     }
 
 
