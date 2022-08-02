@@ -52,8 +52,8 @@ export function Play({ gameState, setGameState }: PlayProps) {
 
     return (
         <div className="row" id="return"> 
+        {playMessage}
         <div className="column" id="map1">
-            {playMessage}
                 <div className ="total-btn-group">
                     <div className="btn-group">
                         <button data-status={gameState.players[0].guessMap[0][0].status}
