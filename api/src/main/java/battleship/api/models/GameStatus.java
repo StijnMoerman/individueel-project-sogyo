@@ -15,7 +15,7 @@ public class GameStatus {
     public GameStatus(battleship.domain.Battleship battleship, 
             String namePlayer1, String namePlayer2) {
         this.endOfGame = battleship.isEndOfGame();
-        this.endOfGame = battleship.isEndOfSetUp();
+        this.endOfSetUp] = battleship.isEndOfSetUp();
         int winner = battleship.getWinner();
         if(winner == Battleship.NO_PLAYERS) {
             this.winner = null;
