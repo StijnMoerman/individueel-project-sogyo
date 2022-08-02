@@ -9,8 +9,14 @@ public class BattleshipImpl implements Battleship {
         
     }
 
+    @Override
     public void confirmEndOfSetUp () {
         endOfSetUp = true;
+    }
+
+    @Override
+    public boolean isEndOfSetUp () {
+        return endOfSetUp;
     }
 
     private void setPlayerOnTurn () {

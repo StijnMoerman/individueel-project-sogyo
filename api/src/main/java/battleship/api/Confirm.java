@@ -24,9 +24,8 @@ public class Confirm {
 
         HttpSession session = request.getSession(true);
         BattleshipImpl battleship = (BattleshipImpl) session.getAttribute("battleship");
-        if (endOfSetUp) {
-            battleship.confirmEndOfSetUp();
-        }
+        battleship.confirmEndOfSetUp();
+        
         session.setAttribute("battleship", battleship);
         
         String namePlayer1 = (String)session.getAttribute("player1");

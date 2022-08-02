@@ -18,6 +18,12 @@ public interface Battleship {
 
 	boolean isEndOfGame();
 
+
+    void confirmEndOfSetUp();
+
+
+	boolean isEndOfSetUp();
+
 	
 	int getWinner();
 

@@ -135,6 +135,7 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
         
         else {
             var endOfSetUp = true;
+            console.log("End Of Setup = " + endOfSetUp);
             try {
                 const response = await fetch('battleship/api/confirm', {
                     method: 'POST',
