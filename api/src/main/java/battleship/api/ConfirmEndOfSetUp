@@ -12,12 +12,12 @@ import jakarta.ws.rs.core.Response;
 import battleship.api.models.*;
 import battleship.domain.BattleshipImpl;
 
-@Path("/confirmendofsetup")
-public class ConfirmEndOfSetUp {
+@Path("/confirm")
+public class Confirm {
     @POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response confirmendofsetup(
+	public Response confirm(
 			@Context HttpServletRequest request) {
 
 
