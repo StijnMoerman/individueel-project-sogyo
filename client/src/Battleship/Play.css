@@ -1,10 +1,12 @@
 /** Add some styles */
-/** Add some styles */
+#return {
+    column-count: 2;
+}
 
 table {
     table-layout: fixed;
-    height: 600px;
-    width: 600px;
+    height: 400px;
+    width: 400px;
     background-color: aqua;
     border: 1px solid black;
     margin-left: auto;
@@ -16,54 +18,59 @@ th,td {
 }
 
 .row {
-    display: flex;
+  margin-left:-5px;
+  margin-right:-5px;
 }
 
 .column {
-    float: left;
-    padding: 10px;
+  float: left;
+  width: 50%;
+  padding: 5px;
 }
 
-#map {
-    width: 60%
-}
-
-#options {
-    width: 40%
-}
-
-.btn-group button {
-  border: 1px solid white; 
-  color: white; /* White text */
-  padding: 10px 24px; /* Some padding */
-  cursor: pointer; /* Pointer/hand icon */
-  float: left; /* Float the buttons side by side */
-  width: 64px;
-  height: 64px;
-}
-
-/* Clear floats (clearfix hack) */
-.btn-group:after {
+/* Clearfix (clear floats) */
+.row::after {
   content: "";
   clear: both;
   display: table;
 }
 
+.btn-group button {
+    border: 1px solid white; 
+    color: white; /* White text */
+    padding: 10px 24px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    float: left; /* Float the buttons side by side */
+    width: 40px;
+    height: 40px;
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
 .btn-group button:not(:last-child) {
-  border-right: none; /* Prevent double borders */
+    border-right: none; /* Prevent double borders */
 }
 
 .total-btn-group div:not(:last-child) button {
-  border-bottom: none; /* Prevent double borders */
+    border-bottom: none; /* Prevent double borders */
 }
 
-/* Add a background color on hover */
+/* Add a background color on hover 
 .btn-group button:hover {
-  background-color: royalblue;
-}
+    background-color: royalblue;
+}*/
 
 [data-status = "unknown"] {
     background-color: aqua;
+}
+
+.btn-group [data-status = "unknown"]:hover {
+    background-color: royalblue;
 }
 
 [data-status = "miss"] {
