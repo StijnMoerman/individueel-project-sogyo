@@ -5,6 +5,9 @@ import battleship.domain.Battleship;
 public class GameStatus {
     boolean endOfGame;
     public boolean getEndOfGame() { return endOfGame; }
+
+    boolean endOfSetUp = false;
+    public boolean getEndOfSetUp() {return endOfSetUp; }
     
     String winner;
     public String getWinner() { return winner; }

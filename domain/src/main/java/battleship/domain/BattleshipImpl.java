@@ -3,9 +3,14 @@ package battleship.domain;
 public class BattleshipImpl implements Battleship {
     Player firstPlayer = new Player();
     Player playerOnTurn = firstPlayer;
+    boolean endOfSetUp = false;
 
     public BattleshipImpl() {
         
+    }
+
+    public void confirmEndOfSetUp () {
+        endOfSetUp = true;
     }
 
     private void setPlayerOnTurn () {

@@ -125,8 +125,39 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
     }
 
     async function confirmPlacement() {
-        setPlayer(2);
-        setPlayMessage("Turn of " +gameState.players[1].name +".");
+        if (player == 1) {
+            setPlayer(2);
+            setPlayMessage("Turn of " +gameState.players[1].name +".");
+            if (confirmButton.current != null) {
+                confirmButton.current.style.display = "none";
+            }
+        }
+        else {
+            try {
+                const response = await fetch('battleship/api/confirmendsetup', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    const gameState = await response.json();
+                    setGameState(gameState);
+                    console.log(gameState);
+                } else {
+                    console.error(response.statusText);
+                }
+            } 
+            catch (error) {
+                if (error instanceof Error) {
+                    console.error(error.toString());
+                } else {
+                    console.log('Unexpected error', error);
+                }
+            }
+        }
     }
 
     return (
@@ -144,7 +175,7 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
                 <br></br>
                 {placeShipMessage}
                 <button className="confirm" ref={confirmButton}
-                            style={{display: "none"}} onClick={()=>confirmPlacement()}> Confirm </button>
+                    style={{display: "none"}} onClick={()=>confirmPlacement()}> Confirm </button>
 
             </div>
             <div className="column" id="map">
