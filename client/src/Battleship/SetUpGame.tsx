@@ -134,7 +134,7 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
         }
         else {
             try {
-                const response = await fetch('battleship/api/confirmendsetup', {
+                const response = await fetch('battleship/api/confirmendofsetup', {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
