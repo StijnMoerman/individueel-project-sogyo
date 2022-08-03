@@ -76,30 +76,59 @@ public class Player {
 
     public void placeShip (int shipEntry, int xEntry, int yEntry, String direction) {
         Ship placedShip = getShip(shipEntry);
+        boolean correctPlacement = true;
         if (direction.charAt(0) == 'N' && yEntry + 1 >= placedShip.getLength()) {
             for (int i = 0; i < placedShip.getLength(); i++) {
-                placeMap[xEntry][yEntry-i].assignShip(getShip(shipEntry));
+                if (placeMap[xEntry][yEntry-i].getHasShip()) {
+                    correctPlacement = false;
+                }
+            }
+            if (correctPlacement) {
+                for (int i = 0; i < placedShip.getLength(); i++) {
+                    placeMap[xEntry][yEntry-i].assignShip(getShip(shipEntry));
+                }
             }
             placedShip.getPlaced();
             this.fleet.setPlaced();
         }
         else if (direction.charAt(0) == 'S' && 10 - yEntry >= placedShip.getLength()) {
             for (int i = 0; i < placedShip.getLength(); i++) {
-                placeMap[xEntry][yEntry+i].assignShip(getShip(shipEntry));
+                if (placeMap[xEntry][yEntry+i].getHasShip()) {
+                    correctPlacement = false;
+                }
+            }
+            if (correctPlacement) {
+                for (int i = 0; i < placedShip.getLength(); i++) {
+                    placeMap[xEntry][yEntry+i].assignShip(getShip(shipEntry));
+                }
             }
             placedShip.getPlaced();
             this.fleet.setPlaced();
         }
         else if (direction.charAt(0) == 'W' && xEntry + 1 >= placedShip.getLength()) {
             for (int i = 0; i < placedShip.getLength(); i++) {
-                placeMap[xEntry-i][yEntry].assignShip(getShip(shipEntry));
+                if (placeMap[xEntry-i][yEntry].getHasShip()) {
+                    correctPlacement = false;
+                }
+            }
+            if (correctPlacement) {
+                for (int i = 0; i < placedShip.getLength(); i++) {
+                    placeMap[xEntry-i][yEntry].assignShip(getShip(shipEntry));
+                }
             }
             placedShip.getPlaced();
             this.fleet.setPlaced();
         }
         else if (direction.charAt(0) == 'E' && 10 - xEntry >= placedShip.getLength()) {
             for (int i = 0; i < placedShip.getLength(); i++) {
-                placeMap[xEntry+i][yEntry].assignShip(getShip(shipEntry));
+                if (placeMap[xEntry+i][yEntry].getHasShip()) {
+                    correctPlacement = false;
+                }
+            }
+            if (correctPlacement) {
+                for (int i = 0; i < placedShip.getLength(); i++) {
+                    placeMap[xEntry+i][yEntry].assignShip(getShip(shipEntry));
+                }
             }
             placedShip.getPlaced();
             this.fleet.setPlaced();
@@ -110,6 +139,9 @@ public class Player {
             +" Direction: " +direction
             +" xEntry: " +xEntry
             +" yEntry: " +yEntry);
+        }
+        if (!correctPlacement) {
+            throw new ArithmeticException("This overlaps with another ship. This is against the rules of the game.");
         }
     }
 
