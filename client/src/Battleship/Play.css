@@ -65,12 +65,20 @@ th,td {
     background-color: royalblue;
 }*/
 
-[data-status = "unknown"] {
-    background-color: aqua;
+[disabled][data-status = "miss"]:hover {
+    background-color: darkblue
 }
 
-.btn-group [data-status = "unknown"]:hover {
-    background-color: royalblue;
+[disabled][data-status = "hit"]:hover {
+    background-color: orangered
+}
+
+[disabled][data-status = "sunk"]:hover {
+    background-color: black
+}
+
+[disabled][data-status = "unknown"]:hover {
+    background-color: aqua
 }
 
 [data-status = "miss"] {
@@ -83,4 +91,12 @@ th,td {
 
 [data-status = "sunk"] {
     background-color: black;
+}
+
+[data-status = "unknown"] {
+    background-color: aqua;
+}
+
+[data-status = "unknown"]:hover {
+    background-color: royalblue;
 }
