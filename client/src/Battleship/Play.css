@@ -60,11 +60,6 @@ th,td {
     border-bottom: none; /* Prevent double borders */
 }
 
-/* Add a background color on hover 
-.btn-group button:hover {
-    background-color: royalblue;
-}*/
-
 [disabled][data-status = "miss"]:hover {
     background-color: darkblue
 }
