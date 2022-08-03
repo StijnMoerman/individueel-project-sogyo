@@ -180,6 +180,32 @@ public class BattleshipImplTest {
     }
 
     @Test
+    public void testPlaceShipsOverlap() {
+        BattleshipImpl Battleship = new BattleshipImpl();
+        Battleship.getPlayer(1).placeShip(0,4,1,"South");
+        try {
+            Battleship.getPlayer(1).placeShip(1,3,2,"East");
+        } catch (ArithmeticException e) {
+            e.printStackTrace();
+        }
+        try {
+            Battleship.getPlayer(1).placeShip(1,5,2,"West");
+        } catch (ArithmeticException e) {
+            e.printStackTrace();
+        }
+        try {
+            Battleship.getPlayer(1).placeShip(1,4,7,"North");
+        } catch (ArithmeticException e) {
+            e.printStackTrace();
+        }
+        try {
+            Battleship.getPlayer(1).placeShip(1,4,0,"South");
+        } catch (ArithmeticException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
     public void fleetPlacedWhenAllShipsPlaced() {
         BattleshipImpl Battleship = new BattleshipImpl();
         Battleship.getPlayer(1).placeShip(0,0,0,"South");
