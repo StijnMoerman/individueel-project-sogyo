@@ -12,21 +12,24 @@ import jakarta.ws.rs.core.Response;
 import battleship.api.models.*;
 import battleship.domain.BattleshipImpl;
 
-@Path("/start")
-public class StartBattleship {
+@Path("/join")
+public class JoinBattleship {
     @POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response initialize(
 			@Context HttpServletRequest request, 
-			String namePlayer) {
-        var battleship = new BattleshipImpl();
+			JoinInput joinInput) {
+		String namePlayer = joinInput.getNamePlayer();
+		String gameID = joinInput.getGameID();
 		
         HttpSession session = request.getSession(true);
+        BattleshipImpl battleship = (BattleshipImpl) session.getAttribute("battleship");
+        String namePlayer1 = (String) session.getAttribute("player1");
         session.setAttribute("battleship", battleship);
-        session.setAttribute("player1", namePlayer);
+        session.setAttribute("player2", namePlayer);
 
-		var output = new Battleship(battleship, namePlayer, "");
+		var output = new Battleship(battleship, namePlayer1, namePlayer);
 		return Response.status(200).entity(output).build();
 	}
 }

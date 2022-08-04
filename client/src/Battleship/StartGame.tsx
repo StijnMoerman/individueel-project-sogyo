@@ -42,7 +42,7 @@ export function StartGame({ setGameState }: StartGameProps) {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ nameplayer1: playerName, nameplayer2: " " })
+                body: JSON.stringify({ nameplayer: playerName })
             });
 
             if (response.ok) {
@@ -71,7 +71,7 @@ export function StartGame({ setGameState }: StartGameProps) {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ nameplayer1: playerName, nameplayer2: " " , gameID: gameID})
+                body: JSON.stringify({ nameplayer: playerName , gameID: gameID})
             });
 
             if (response.ok) {
