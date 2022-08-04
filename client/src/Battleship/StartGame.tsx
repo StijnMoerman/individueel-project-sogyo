@@ -42,7 +42,7 @@ export function StartGame({ setGameState }: StartGameProps) {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({playerName: playerName})
+                body: JSON.stringify({namePlayer: playerName})
             });
 
             if (response.ok) {

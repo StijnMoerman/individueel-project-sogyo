@@ -13,13 +13,13 @@ import static org.mockito.Mockito.*;
 public class StartBattleshipTest {
     @Test
     public void startingBattleshipShouldBeAllowed() {
-        var response = startBattleship("Mario", "Luigi");
+        var response = startBattleship("Mario");
         assertEquals(200, response.getStatus());
     }
 
     @Test
     public void startingBattleshipReturnsAGameWithoutAWinner() {
-        var response = startBattleship("Mario", "Luigi");
+        var response = startBattleship("Mario");
         var entity = (Battleship)response.getEntity();
         var gameState = entity.getGameStatus();
         assertFalse(gameState.getEndOfGame());
@@ -29,12 +29,12 @@ public class StartBattleshipTest {
 
     @Test
     public void startingBattleshipReturnsThePlayerData() {
-        var response = startBattleship("Mario", "Luigi");
+        var response = startBattleship("Mario");
         var entity = (Battleship)response.getEntity();
         var players = entity.getPlayers();
         assertEquals(2, players.length);
         assertEquals("Mario", players[0].getName());
-        assertEquals("Luigi", players[1].getName());
+        assertEquals("", players[1].getName());
         assertTrue(players[0].getHasTurn());
         assertFalse(players[1].getHasTurn());
         assertEquals("player1", players[0].getType());
@@ -49,27 +49,26 @@ public class StartBattleshipTest {
 
     @Test
     public void startingBattleshipStartsANewSession() {
-        startBattleship("Mario", "Luigi");
+        startBattleship("Mario");
         verify(request).getSession(true);
     }
 
     @Test
     public void startingBattleshipSavesTheNewGameInASession() {
-        startBattleship("Mario", "Luigi");
+        startBattleship("Mario");
         verify(session).setAttribute(eq("battleship"), any(BattleshipImpl.class));
     }
 
     @Test
     public void startingBattleshipSavesTheNamesInASession() {
-        startBattleship("Wario", "Waluigi");
+        startBattleship("Wario");
         verify(session).setAttribute("player1", "Wario");
-        verify(session).setAttribute("player2", "Waluigi");
     }
 
-    private Response startBattleship(String namePlayer1, String namePlayer2) {
+    private Response startBattleship(String namePlayer1) {
         var servlet = new StartBattleship();
         var request = createRequestContext();
-        var input = playerInput(namePlayer1, namePlayer2);
+        var input = startInput(namePlayer1);
         return servlet.initialize(request, input);
     }
 
@@ -83,10 +82,9 @@ public class StartBattleshipTest {
     private HttpServletRequest request;
     private HttpSession session;
 
-    private PlayerInput playerInput(String namePlayer1, String namePlayer2) {
-        var input = new PlayerInput();
-        input.setNameplayer1(namePlayer1);
-        input.setNameplayer2(namePlayer2);
+    private StartInput startInput(String namePlayer) {
+        var input = new StartInput();
+        input.setNamePlayer(namePlayer);
         return input;
     }
 }
