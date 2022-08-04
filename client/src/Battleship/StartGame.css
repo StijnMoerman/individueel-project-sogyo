@@ -8,6 +8,16 @@
     background-color: Yellow;
 }
 
+.joinGameButton {
+    font-size: 2em;
+    background-color: Yellow;
+    border: 2px solid black;
+    transition-duration: 1s;
+}
+.joinGameButton:hover {
+    background-color: Aqua;
+}
+
 .errorMessage {
     height: 1em;
     color: red;
