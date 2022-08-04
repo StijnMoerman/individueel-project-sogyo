@@ -19,8 +19,9 @@ public class StartBattleship {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response initialize(
 			@Context HttpServletRequest request, 
-			String namePlayer) {
+			StartInput startInput) {
         var battleship = new BattleshipImpl();
+		String namePlayer = startInput.getNamePlayer();
 		
         HttpSession session = request.getSession(true);
         session.setAttribute("battleship", battleship);

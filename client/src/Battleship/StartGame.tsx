@@ -15,7 +15,7 @@ export function StartGame({ setGameState }: StartGameProps) {
     async function tryStartGame(e: React.FormEvent) {
         e.preventDefault(); // Prevent default browser behavior of submitting forms
         if (!playerName) {
-            setErrorMessage("A name is required for player 1");
+            setErrorMessage("A name is required for players");
             return;
         }
         if ((e.target as HTMLTextAreaElement).className == "joinGameButton" && !gameID ) {
@@ -42,7 +42,7 @@ export function StartGame({ setGameState }: StartGameProps) {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ nameplayer: playerName })
+                body: JSON.stringify({playerName: playerName})
             });
 
             if (response.ok) {
