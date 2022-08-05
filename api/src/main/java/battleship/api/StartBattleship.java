@@ -37,7 +37,7 @@ public class StartBattleship {
         session.setAttribute(gameID +"-battleship", battleship);
         session.setAttribute(gameID +"-player1", namePlayer);
 
-		var output = new Battleship(battleship, namePlayer, "",gameID);
+		var output = new Battleship(battleship, namePlayer, "",gameID,1);
 		return Response.status(200).entity(output).build();
 	}
 }

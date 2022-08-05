@@ -2,11 +2,20 @@ package battleship.api.models;
 
 public class PlaceShipInput {
     
+    String gameID; 
     int playerIndex;
     int shipIndex;
     String direction;
     int xEntry;
     int yEntry;
+
+    public String getGameID() {
+        return gameID;
+    }
+
+    public void setGameID(String gameID) {
+        this.gameID = gameID;
+    }
 
     public int getPlayerIndex() {
 		return playerIndex;

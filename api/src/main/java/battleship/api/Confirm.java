@@ -19,18 +19,19 @@ public class Confirm {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response confirm(
 			@Context HttpServletRequest request,
-            boolean endOfSetUp) {
+            ConfirmInput confirmInput) {
 
-        String gameID = "";
+        String gameID = confirmInput.getGameID();
+        int playerIndex = confirmInput.getPlayerIndex();
         HttpSession session = request.getSession(true);
-        BattleshipImpl battleship = (BattleshipImpl) session.getAttribute("battleship");
+        BattleshipImpl battleship = (BattleshipImpl) session.getAttribute(gameID+"-battleship");
         battleship.confirmEndOfSetUp();
         
         session.setAttribute("battleship", battleship);
         
         String namePlayer1 = (String)session.getAttribute("player1");
         String namePlayer2 = (String)session.getAttribute("player2");
-		var output = new Battleship(battleship, namePlayer1, namePlayer2, gameID);
+		var output = new Battleship(battleship, namePlayer1, namePlayer2, gameID, playerIndex);
 		return Response.status(200).entity(output).build();
 	}
 }

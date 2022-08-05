@@ -9,9 +9,10 @@ type SetUpGameProps = {
 
 export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
 
-    const [player, setPlayer] = useState(1);
+    const [player, setPlayer] = useState(gameState.activePlayerIndex);
+    console.log(gameState);
 
-    const [playMessage, setPlayMessage] = useState("Turn of " +gameState.players[player-1].name +".");
+    const [playMessage, setPlayMessage] = useState("Time to place your fleet.");
 
     const [placeShipMessage, setPlaceShipMessage] = useState("Pick a ship and a direction and then click on a cell in the map on the right to place your ship.");
 
@@ -98,7 +99,7 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({playerIndex: player,shipIndex: shipIndex,direction: direction,xEntry: x,yEntry: y})
+                    body: JSON.stringify({playerIndex: player,shipIndex: shipIndex,direction: direction,xEntry: x,yEntry: y, gameID: gameState.gameID})
                 });
 
                 if (response.ok) {
@@ -134,8 +135,6 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
         }
         
         else {
-            var endOfSetUp = true;
-            console.log("End Of Setup = " + endOfSetUp);
             try {
                 const response = await fetch('battleship/api/confirm', {
                     method: 'POST',
@@ -143,7 +142,7 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(endOfSetUp)
+                    body: JSON.stringify({gameID: gameState.gameID, playerIndex: player})
                 });
 
                 if (response.ok) {

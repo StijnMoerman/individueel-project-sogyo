@@ -21,21 +21,21 @@ public class PlaceShip {
 			@Context HttpServletRequest request, 
 			PlaceShipInput placeShipInput) {
 
-        String gameID = "";
+        String gameID = placeShipInput.getGameID();
         int playerIndex = placeShipInput.getPlayerIndex();
         int shipIndex = placeShipInput.getShipIndex();
         String direction = placeShipInput.getDirection();
         int xEntry = placeShipInput.getxEntry();
         int yEntry = placeShipInput.getyEntry();
         HttpSession session = request.getSession(true);
-        BattleshipImpl battleship = (BattleshipImpl) session.getAttribute("battleship");
+        BattleshipImpl battleship = (BattleshipImpl) session.getAttribute(gameID+"-battleship");
         
         battleship.getPlayer(playerIndex).placeShip(shipIndex, xEntry, yEntry, direction);
-        session.setAttribute("battleship", battleship);
+        session.setAttribute(gameID+"-battleship", battleship);
         
         String namePlayer1 = (String)session.getAttribute("player1");
         String namePlayer2 = (String)session.getAttribute("player2");
-		var output = new Battleship(battleship, namePlayer1, namePlayer2, gameID);
+		var output = new Battleship(battleship, namePlayer1, namePlayer2, gameID,playerIndex);
 		return Response.status(200).entity(output).build();
 	}
 }

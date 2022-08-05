@@ -1,7 +1,9 @@
 import type { FieldsetHTMLAttributes } from "react";
 
 export interface GameState {
-    players: [ Player, Player ]; // a player array contains exactly two Players
+    gameID: String
+    players: [ Player, Player ];// a player array contains exactly two Players
+    activePlayerIndex: number 
     gameStatus: {
         endOfGame: boolean;
         endOfSetUp: boolean;
