@@ -24,12 +24,12 @@ public class JoinBattleship {
 		String gameID = joinInput.getGameID();
 		
         HttpSession session = request.getSession(true);
-        BattleshipImpl battleship = (BattleshipImpl) session.getAttribute("battleship");
-        String namePlayer1 = (String) session.getAttribute("player1");
-        session.setAttribute("battleship", battleship);
-        session.setAttribute("player2", namePlayer);
+        BattleshipImpl battleship = (BattleshipImpl) session.getAttribute(gameID +"-battleship");
+        String namePlayer1 = (String) session.getAttribute(gameID+"-player1");
+        session.setAttribute(gameID+"-battleship", battleship);
+        session.setAttribute(gameID+"-player2", namePlayer);
 
-		var output = new Battleship(battleship, namePlayer1, namePlayer);
+		var output = new Battleship(battleship, namePlayer1, namePlayer,gameID);
 		return Response.status(200).entity(output).build();
 	}
 }

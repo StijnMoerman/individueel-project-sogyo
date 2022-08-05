@@ -21,6 +21,7 @@ public class PlaceShip {
 			@Context HttpServletRequest request, 
 			PlaceShipInput placeShipInput) {
 
+        String gameID = "";
         int playerIndex = placeShipInput.getPlayerIndex();
         int shipIndex = placeShipInput.getShipIndex();
         String direction = placeShipInput.getDirection();
@@ -34,7 +35,7 @@ public class PlaceShip {
         
         String namePlayer1 = (String)session.getAttribute("player1");
         String namePlayer2 = (String)session.getAttribute("player2");
-		var output = new Battleship(battleship, namePlayer1, namePlayer2);
+		var output = new Battleship(battleship, namePlayer1, namePlayer2, gameID);
 		return Response.status(200).entity(output).build();
 	}
 }

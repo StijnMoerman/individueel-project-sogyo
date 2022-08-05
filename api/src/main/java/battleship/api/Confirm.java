@@ -21,7 +21,7 @@ public class Confirm {
 			@Context HttpServletRequest request,
             boolean endOfSetUp) {
 
-
+        String gameID = "";
         HttpSession session = request.getSession(true);
         BattleshipImpl battleship = (BattleshipImpl) session.getAttribute("battleship");
         battleship.confirmEndOfSetUp();
@@ -30,7 +30,7 @@ public class Confirm {
         
         String namePlayer1 = (String)session.getAttribute("player1");
         String namePlayer2 = (String)session.getAttribute("player2");
-		var output = new Battleship(battleship, namePlayer1, namePlayer2);
+		var output = new Battleship(battleship, namePlayer1, namePlayer2, gameID);
 		return Response.status(200).entity(output).build();
 	}
 }

@@ -55,14 +55,16 @@ public class StartBattleshipTest {
 
     @Test
     public void startingBattleshipSavesTheNewGameInASession() {
-        startBattleship("Mario");
-        verify(session).setAttribute(eq("battleship"), any(BattleshipImpl.class));
+        var response = startBattleship("Mario");
+        var entity = (Battleship)response.getEntity();
+        verify(session).setAttribute(eq(entity.getGameID()+"-battleship"), any(BattleshipImpl.class));
     }
 
     @Test
     public void startingBattleshipSavesTheNamesInASession() {
-        startBattleship("Wario");
-        verify(session).setAttribute("player1", "Wario");
+        var response = startBattleship("Wario");
+        var entity = (Battleship)response.getEntity();
+        verify(session).setAttribute(entity.getGameID()+"-player1", "Wario");
     }
 
     private Response startBattleship(String namePlayer1) {

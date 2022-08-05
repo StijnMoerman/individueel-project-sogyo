@@ -9,6 +9,9 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+
+import java.util.Random;
+
 import battleship.api.models.*;
 import battleship.domain.BattleshipImpl;
 
@@ -22,12 +25,19 @@ public class StartBattleship {
 			StartInput startInput) {
         var battleship = new BattleshipImpl();
 		String namePlayer = startInput.getNamePlayer();
-		
-        HttpSession session = request.getSession(true);
-        session.setAttribute("battleship", battleship);
-        session.setAttribute("player1", namePlayer);
 
-		var output = new Battleship(battleship, namePlayer, "");
+		Random random = new Random();
+		String gameID = random.ints(48, 123)
+		.filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+		.limit(10)
+		.collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+		.toString();
+
+        HttpSession session = request.getSession(true);
+        session.setAttribute(gameID +"-battleship", battleship);
+        session.setAttribute(gameID +"-player1", namePlayer);
+
+		var output = new Battleship(battleship, namePlayer, "",gameID);
 		return Response.status(200).entity(output).build();
 	}
 }

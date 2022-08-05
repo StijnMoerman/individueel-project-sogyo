@@ -12,29 +12,19 @@ export function StartGame({ setGameState }: StartGameProps) {
     const [playerName, setPlayerName] = useState("");
     const [gameID, setGameID] = useState("");
 
-    async function tryStartGame(e: React.FormEvent) {
-        e.preventDefault(); // Prevent default browser behavior of submitting forms
+    async function tryStartGame() {
         if (!playerName) {
             setErrorMessage("A name is required for players");
             return;
         }
-        if ((e.target as HTMLTextAreaElement).className == "joinGameButton" && !gameID ) {
-            setErrorMessage("A gameID is required to join a game");
-            return;
-        }
         setErrorMessage("");
-
-        if ((e.target as HTMLTextAreaElement).className == "joinGameButton") {
-            joinGame();
-        }
-        else {
-            startNewGame();
-        }
+        startNewGame();
     }
 
         
 
     async function startNewGame() {
+        console.log("Make new game, with new gameID");
         try {
             const response = await fetch('battleship/api/start', {
                 method: 'POST',
@@ -64,6 +54,13 @@ export function StartGame({ setGameState }: StartGameProps) {
 
         
     async function joinGame() {
+        if (!gameID ) {
+            setErrorMessage("A gameID is required to join a game");
+            return;
+        }
+        setErrorMessage("");
+
+        console.log("Try to connect with game with gameID" + {gameID});
         try {
             const response = await fetch('battleship/api/join', {
                 method: 'POST',
@@ -71,7 +68,7 @@ export function StartGame({ setGameState }: StartGameProps) {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ nameplayer: playerName , gameID: gameID})
+                body: JSON.stringify({ namePlayer: playerName , gameID: gameID})
             });
 
             if (response.ok) {
@@ -93,7 +90,7 @@ export function StartGame({ setGameState }: StartGameProps) {
 
 
     return (
-        <form onSubmit={(e) => tryStartGame(e)}>
+        <div >
             <input value={playerName}
                 placeholder="Player name"
                 onChange={(e) => setPlayerName(e.target.value)}
@@ -106,13 +103,13 @@ export function StartGame({ setGameState }: StartGameProps) {
 
             <p className="errorMessage">{errorMessage}</p>
 
-            <button className="startGameButton" type="submit">
+            <button className="startGameButton" onClick={() => tryStartGame()}>
                 Start a Battleship game!
             </button>
             
-            <button className="joinGameButton" type="submit">
+            <button className="joinGameButton" onClick={()=> joinGame()}>
                 Join this Battleship game!
             </button>
-        </form>
+        </div>
     )
 }
