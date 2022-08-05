@@ -182,7 +182,7 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
     return (
         <div className="row">
             <div className="column" id="options">
-                Hi! Welcome to Battleship! Time to set up your fleet! {playMessage}
+                Hi! Welcome to a new game of Battleship with gameID {gameState.gameID}! Time to set up your fleet {gameState.players[player-1].name}! {playMessage}
                 <br></br>
                 Ships: <select value={ship.name} onChange={handleShipChange}>
                     {ships}
