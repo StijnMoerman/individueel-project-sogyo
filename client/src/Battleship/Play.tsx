@@ -91,7 +91,7 @@ export function Play({ gameState, setGameState }: PlayProps) {
 
     if (!beginInterval) {
         console.log("Begin refresh");
-        setInterval(refresh,10000);
+        setInterval(refresh,1000);
         setBeginInterval(true);
     }
 
