@@ -79,13 +79,37 @@ public class Player {
         boolean correctPlacement = true;
         if (direction.charAt(0) == 'N' && yEntry + 1 >= placedShip.getLength()) {
             for (int i = 0; i < placedShip.getLength(); i++) {
-                if (placeMap[xEntry][yEntry-i].getHasShip()) {
+                if (!placeMap[xEntry][yEntry-i].getAvailable()) {
                     correctPlacement = false;
                 }
             }
             if (correctPlacement) {
                 for (int i = 0; i < placedShip.getLength(); i++) {
                     placeMap[xEntry][yEntry-i].assignShip(getShip(shipEntry));
+                    if (xEntry > 0) {
+                        placeMap[xEntry-1][yEntry-i].setUnavailable();
+                        if (yEntry < 9) {
+                            placeMap[xEntry-1][yEntry+1].setUnavailable();
+                        }
+                        if (yEntry >= placedShip.getLength()) {
+                            placeMap[xEntry-1][yEntry- placedShip.getLength()].setUnavailable();
+                        }
+                    }
+                    if (xEntry < 9)  {
+                        placeMap[xEntry+1][yEntry-i].setUnavailable();
+                        if (yEntry < 9) {
+                            placeMap[xEntry+1][yEntry+1].setUnavailable();
+                        }
+                        if (yEntry >= placedShip.getLength()) {
+                            placeMap[xEntry+1][yEntry- placedShip.getLength()].setUnavailable();
+                        }
+                    }
+                }
+                if (yEntry < 9) {
+                    placeMap[xEntry][yEntry+1].setUnavailable();
+                }
+                if (yEntry >= placedShip.getLength()) {
+                    placeMap[xEntry][yEntry- placedShip.getLength()].setUnavailable();
                 }
             }
             placedShip.getPlaced();
@@ -93,13 +117,37 @@ public class Player {
         }
         else if (direction.charAt(0) == 'S' && 10 - yEntry >= placedShip.getLength()) {
             for (int i = 0; i < placedShip.getLength(); i++) {
-                if (placeMap[xEntry][yEntry+i].getHasShip()) {
+                if (!placeMap[xEntry][yEntry+i].getAvailable()) {
                     correctPlacement = false;
                 }
             }
             if (correctPlacement) {
                 for (int i = 0; i < placedShip.getLength(); i++) {
                     placeMap[xEntry][yEntry+i].assignShip(getShip(shipEntry));
+                    if (xEntry > 0) {
+                        placeMap[xEntry-1][yEntry+i].setUnavailable();
+                        if (yEntry > 0) {
+                            placeMap[xEntry-1][yEntry-1].setUnavailable();
+                        }
+                        if (yEntry  + placedShip.getLength() <= 9) {
+                            placeMap[xEntry-1][yEntry+ placedShip.getLength()].setUnavailable();
+                        }
+                    }
+                    if (xEntry < 9)  {
+                        placeMap[xEntry+1][yEntry+i].setUnavailable();
+                        if (yEntry > 0) {
+                            placeMap[xEntry+1][yEntry-1].setUnavailable();
+                        }
+                        if (yEntry  + placedShip.getLength() <= 9) {
+                            placeMap[xEntry+1][yEntry+ placedShip.getLength()].setUnavailable();
+                        }
+                    }
+                }
+                if (yEntry > 0) {
+                    placeMap[xEntry][yEntry-1].setUnavailable();
+                }
+                if (yEntry  + placedShip.getLength() <= 9) {
+                    placeMap[xEntry][yEntry + placedShip.getLength()].setUnavailable();
                 }
             }
             placedShip.getPlaced();
@@ -114,6 +162,30 @@ public class Player {
             if (correctPlacement) {
                 for (int i = 0; i < placedShip.getLength(); i++) {
                     placeMap[xEntry-i][yEntry].assignShip(getShip(shipEntry));
+                    if (yEntry > 0) {
+                        placeMap[xEntry-i][yEntry-1].setUnavailable();
+                        if (xEntry < 9) {
+                            placeMap[xEntry+1][yEntry-1].setUnavailable();
+                        }
+                        if (xEntry >= placedShip.getLength()) {
+                            placeMap[xEntry- placedShip.getLength()][yEntry-1].setUnavailable();
+                        }
+                    }
+                    if (yEntry < 9)  {
+                        placeMap[xEntry-i][yEntry+1].setUnavailable();
+                        if (xEntry < 9) {
+                            placeMap[xEntry+1][yEntry+1].setUnavailable();
+                        }
+                        if (xEntry >= placedShip.getLength()) {
+                            placeMap[xEntry- placedShip.getLength()][yEntry+1].setUnavailable();
+                        }
+                    }
+                }
+                if (xEntry < 9) {
+                    placeMap[xEntry+1][yEntry].setUnavailable();
+                }
+                if (xEntry >= placedShip.getLength()) {
+                    placeMap[xEntry- placedShip.getLength()][yEntry].setUnavailable();
                 }
             }
             placedShip.getPlaced();
@@ -128,6 +200,30 @@ public class Player {
             if (correctPlacement) {
                 for (int i = 0; i < placedShip.getLength(); i++) {
                     placeMap[xEntry+i][yEntry].assignShip(getShip(shipEntry));
+                    if (yEntry > 0) {
+                        placeMap[xEntry+i][yEntry-1].setUnavailable();
+                        if (xEntry > 0) {
+                            placeMap[xEntry-1][yEntry-1].setUnavailable();
+                        }
+                        if (xEntry  + placedShip.getLength() <= 9) {
+                            placeMap[xEntry+ placedShip.getLength()][yEntry-1].setUnavailable();
+                        }
+                    }
+                    if (yEntry < 9)  {
+                        placeMap[xEntry+i][yEntry+1].setUnavailable();
+                        if (xEntry > 0) {
+                            placeMap[xEntry-1][yEntry+1].setUnavailable();
+                        }
+                        if (xEntry  + placedShip.getLength() <= 9) {
+                            placeMap[xEntry+placedShip.getLength()][yEntry+ 1].setUnavailable();
+                        }
+                    }
+                }
+                if (xEntry > 0) {
+                    placeMap[xEntry-1][yEntry].setUnavailable();
+                }
+                if (xEntry  + placedShip.getLength() <= 9) {
+                    placeMap[xEntry + placedShip.getLength()][yEntry].setUnavailable();
                 }
             }
             placedShip.getPlaced();
