@@ -31,6 +31,7 @@ public class StartBattleshipTest {
     public void startingBattleshipReturnsThePlayerData() {
         var response = startBattleship("Mario");
         var entity = (Battleship)response.getEntity();
+        assertEquals(1,entity.getActivePlayerIndex());
         var players = entity.getPlayers();
         assertEquals(2, players.length);
         assertEquals("Mario", players[0].getName());
@@ -65,21 +66,43 @@ public class StartBattleshipTest {
         var entity = (Battleship)response.getEntity();
         verify(session).setAttribute(entity.getGameID()+"-player1", "Wario");
     }
-
+/* 
+    @Test
+    public void startAndJoin() {
+        var response = startBattleship("Wario");
+        var entity = (Battleship)response.getEntity();
+        String gameID = entity.getGameID();
+        var responseJoin = joinBattleship( "Waluigi", gameID);
+        var entityJoin = (Battleship)responseJoin.getEntity();
+        verify(session).setAttribute(entityJoin.getGameID()+"-player2", "Waluigi");
+    }
+*/
     private Response startBattleship(String namePlayer1) {
         var servlet = new StartBattleship();
         var request = createRequestContext();
         var input = startInput(namePlayer1);
         return servlet.initialize(request, input);
     }
-
+/* 
+    private Response joinBattleship (String namePlayer2, String gameID) {
+        var servlet = new JoinBattleship();
+        //var request = getRequestContext();
+        var input = joinInput(namePlayer2,gameID);
+        return servlet.initialize(request, input);
+    }
+*/
     private HttpServletRequest createRequestContext() {
         request = mock(HttpServletRequest.class);
         session = mock(HttpSession.class);
         when(request.getSession(true)).thenReturn(session);
         return request;
     }
-
+/* 
+    private HttpServletRequest getRequestContext () {
+        when(request.getSession(true)).thenReturn(session);
+        return request;
+    }
+*/
     private HttpServletRequest request;
     private HttpSession session;
 
@@ -88,4 +111,12 @@ public class StartBattleshipTest {
         input.setNamePlayer(namePlayer);
         return input;
     }
+/* 
+    private JoinInput joinInput(String namePlayer,String gameID) {
+        var input = new JoinInput();
+        input.setNamePlayer(namePlayer);
+        input.setGameID(gameID);
+        return input;
+    }
+*/  
 }

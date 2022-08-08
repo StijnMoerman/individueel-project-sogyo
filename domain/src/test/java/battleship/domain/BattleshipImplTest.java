@@ -206,13 +206,46 @@ public class BattleshipImplTest {
     }
 
     @Test
-    public void fleetPlacedWhenAllShipsPlaced() {
+    public void fleetPlacedWhenAllShipsPlacedSouth() {
         BattleshipImpl Battleship = new BattleshipImpl();
         Battleship.getPlayer(1).placeShip(0,0,0,"South");
-        Battleship.getPlayer(1).placeShip(1,2,0,"South");
+        Battleship.getPlayer(1).placeShip(1,2,6,"South");
         Battleship.getPlayer(1).placeShip(2,4,0,"South");
         Battleship.getPlayer(1).placeShip(3,6,0,"South");
-        Battleship.getPlayer(1).placeShip(4,8,0,"South");
+        Battleship.getPlayer(1).placeShip(4,9,8,"South");
+        assertTrue(Battleship.getPlayer(1).getFleet().isPlaced());
+    }
+
+    @Test
+    public void fleetPlacedWhenAllShipsPlacedNorth() {
+        BattleshipImpl Battleship = new BattleshipImpl();
+        Battleship.getPlayer(1).placeShip(0,0,4,"North");
+        Battleship.getPlayer(1).placeShip(1,2,9,"North");
+        Battleship.getPlayer(1).placeShip(2,4,2,"North");
+        Battleship.getPlayer(1).placeShip(3,6,2,"North");
+        Battleship.getPlayer(1).placeShip(4,9,9,"North");
+        assertTrue(Battleship.getPlayer(1).getFleet().isPlaced());
+    }
+
+    @Test
+    public void fleetPlacedWhenAllShipsPlacedWest() {
+        BattleshipImpl Battleship = new BattleshipImpl();
+        Battleship.getPlayer(1).placeShip(0,4,0,"West");
+        Battleship.getPlayer(1).placeShip(1,9,2,"West");
+        Battleship.getPlayer(1).placeShip(2,2,4,"West");
+        Battleship.getPlayer(1).placeShip(3,2,6,"West");
+        Battleship.getPlayer(1).placeShip(4,9,9,"West");
+        assertTrue(Battleship.getPlayer(1).getFleet().isPlaced());
+    }
+
+    @Test
+    public void fleetPlacedWhenAllShipsPlacedEast() {
+        BattleshipImpl Battleship = new BattleshipImpl();
+        Battleship.getPlayer(1).placeShip(0,0,0,"East");
+        Battleship.getPlayer(1).placeShip(1,6,2,"East");
+        Battleship.getPlayer(1).placeShip(2,0,4,"East");
+        Battleship.getPlayer(1).placeShip(3,0,6,"East");
+        Battleship.getPlayer(1).placeShip(4,8,9,"East");
         assertTrue(Battleship.getPlayer(1).getFleet().isPlaced());
     }
 
