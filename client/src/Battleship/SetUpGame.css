@@ -56,15 +56,20 @@ th,td {
   border-bottom: none; /* Prevent double borders */
 }
 
-/* Add a background color on hover */
-.btn-group button:hover {
-  background-color: royalblue;
-}
 
-[data-status = "true"] {
+[data-status = "available"] {
     background-color: aqua;
 }
 
-[data-status = "false"] {
+[data-status = "unavailable"] {
+  background-color: darkblue;
+}
+
+[data-status = "occupied"] {
     background-color: red;
+}
+
+/* Add a background color on hover */
+[data-status = "available"]:hover {
+  background-color: royalblue;
 }

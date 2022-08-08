@@ -9,9 +9,10 @@ type SetUpGameProps = {
 
 export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
 
-    const [player, setPlayer] = useState(1);
+    const [player, setPlayer] = useState(gameState.activePlayerIndex);
+    console.log(gameState);
 
-    const [playMessage, setPlayMessage] = useState("Turn of " +gameState.players[player-1].name +".");
+    const [playMessage, setPlayMessage] = useState("Time to place your fleet.");
 
     const [placeShipMessage, setPlaceShipMessage] = useState("Pick a ship and a direction and then click on a cell in the map on the right to place your ship.");
 
@@ -98,7 +99,7 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({playerIndex: player,shipIndex: shipIndex,direction: direction,xEntry: x,yEntry: y})
+                    body: JSON.stringify({playerIndex: player,shipIndex: shipIndex,direction: direction,xEntry: x,yEntry: y, gameID: gameState.gameID})
                 });
 
                 if (response.ok) {
@@ -125,50 +126,39 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
     }
 
     async function confirmPlacement() {
-        if (player == 1) {
-            setPlayer(2);
-            setPlayMessage("Turn of " +gameState.players[1].name +".");
-            if (confirmButton.current != null) {
-                confirmButton.current.style.display = "none";
-            }
-        }
-        
-        else {
-            var endOfSetUp = true;
-            console.log("End Of Setup = " + endOfSetUp);
-            try {
-                const response = await fetch('battleship/api/confirm', {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(endOfSetUp)
-                });
+        try {
+            const response = await fetch('battleship/api/confirm', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({gameID: gameState.gameID, playerIndex: player})
+            });
 
-                if (response.ok) {
-                    const gameState = await response.json();
-                    setGameState(gameState);
-                    console.log(gameState);
-                } else {
-                    console.error(response.statusText);
-                }
-            } 
-            catch (error) {
-                if (error instanceof Error) {
-                    console.error(error.toString());
-                } else {
-                    console.log('Unexpected error', error);
-                }
+            if (response.ok) {
+                const gameState = await response.json();
+                setGameState(gameState);
+                console.log(gameState);
+            } else {
+                console.error(response.statusText);
+            }
+        } 
+        catch (error) {
+            if (error instanceof Error) {
+                console.error(error.toString());
+            } else {
+                console.log('Unexpected error', error);
             }
         }
+    
     }
 
     
     const renderKeys = (rowval: number) => {
         var arr = [0,1,2,3,4,5,6,7,8,9]
         return arr.map((val) => { // here you return the new array created by map
-            return <button data-status={gameState.players[player-1].setUpMap[val][rowval].available}
+            return <button data-status={gameState.players[player-1].setUpMap[val][rowval].status}
             onClick={()=>placeShip(val,rowval)}></button>
         });
     };
@@ -183,7 +173,7 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
     return (
         <div className="row">
             <div className="column" id="options">
-                Hi! Welcome to Battleship! Time to set up your fleet! {playMessage}
+                Hi! Welcome to a new game of Battleship with gameID {gameState.gameID}! Time to set up your fleet {gameState.players[player-1].name}! {playMessage}
                 <br></br>
                 Ships: <select value={ship.name} onChange={handleShipChange}>
                     {ships}

@@ -9,6 +9,9 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+
+import java.util.Random;
+
 import battleship.api.models.*;
 import battleship.domain.BattleshipImpl;
 
@@ -19,17 +22,23 @@ public class StartBattleship {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response initialize(
 			@Context HttpServletRequest request, 
-			PlayerInput players) {
+			StartInput startInput) {
         var battleship = new BattleshipImpl();
-        String namePlayer1 = players.getNameplayer1();
-		String namePlayer2 = players.getNameplayer2();
-		
-        HttpSession session = request.getSession(true);
-        session.setAttribute("battleship", battleship);
-        session.setAttribute("player1", namePlayer1);
-        session.setAttribute("player2", namePlayer2);
+		String namePlayer = startInput.getNamePlayer();
 
-		var output = new Battleship(battleship, namePlayer1, namePlayer2);
+		Random random = new Random();
+		String gameID = random.ints(48, 123)
+		.filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+		.limit(10)
+		.collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+		.toString();
+
+        HttpSession session = request.getSession(true);
+        session.setAttribute(gameID +"-battleship", battleship);
+        session.setAttribute(gameID +"-player1", namePlayer);
+		session.setAttribute(gameID+"-endofsetup", false);
+
+		var output = new Battleship(battleship, namePlayer, "",gameID,1);
 		return Response.status(200).entity(output).build();
 	}
 }

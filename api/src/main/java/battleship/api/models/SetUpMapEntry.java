@@ -2,14 +2,18 @@ package battleship.api.models;
 
 public class SetUpMapEntry {
     public SetUpMapEntry(battleship.domain.Battleship battleship, int x, int y, int player) {
-        hasBoat = battleship.getPlayer(player).getPlaceMap()[x][y].getHasShip();
-        available = !hasBoat;
+        if (battleship.getPlayer(player).getPlaceMap()[x][y].getHasShip()) {
+            status = "occupied";
+        }
+        else if (battleship.getPlayer(player).getPlaceMap()[x][y].getAvailable()) {
+            status = "available";
+        }
+        else {
+            status = "unavailable";
+        }
     }
     
-    boolean hasBoat;
-    public boolean getHasBoat() { return hasBoat; }
-
-    boolean available;
-    public boolean getAvailable() { return available; }
-
+    String status;
+    public String getStatus() { return status; }
+    
 }

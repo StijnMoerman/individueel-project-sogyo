@@ -6,31 +6,25 @@ type StartGameProps = {
     setGameState(newGameState: GameState): void;
 }
 
-/**
- * Allows the players to enter their name. A name is required for both players. They can't have the same names.
- */
 export function StartGame({ setGameState }: StartGameProps) {
 
     const [errorMessage, setErrorMessage] = useState("");
-    const [playerOne, setPlayerOne] = useState("");
-    const [playerTwo, setPlayerTwo] = useState("");
+    const [playerName, setPlayerName] = useState("");
+    const [gameID, setGameID] = useState("");
 
-    async function tryStartGame(e: React.FormEvent) {
-        e.preventDefault(); // Prevent default browser behavior of submitting forms
-        if (!playerOne) {
-            setErrorMessage("A name is required for player 1");
-            return;
-        }
-        if (!playerTwo) {
-            setErrorMessage("A name is required for player 2");
-            return;
-        }
-        if (playerOne === playerTwo) {
-            setErrorMessage("Each player should have a unique name");
+    async function tryStartGame() {
+        if (!playerName) {
+            setErrorMessage("A name is required for players");
             return;
         }
         setErrorMessage("");
+        startNewGame();
+    }
 
+        
+
+    async function startNewGame() {
+        console.log("Make new game, with new gameID");
         try {
             const response = await fetch('battleship/api/start', {
                 method: 'POST',
@@ -38,7 +32,7 @@ export function StartGame({ setGameState }: StartGameProps) {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ nameplayer1: playerOne, nameplayer2: playerTwo })
+                body: JSON.stringify({namePlayer: playerName})
             });
 
             if (response.ok) {
@@ -58,23 +52,64 @@ export function StartGame({ setGameState }: StartGameProps) {
         }
     }
 
+        
+    async function joinGame() {
+        if (!gameID ) {
+            setErrorMessage("A gameID is required to join a game");
+            return;
+        }
+        setErrorMessage("");
+
+        console.log("Try to connect with game with gameID" + {gameID});
+        try {
+            const response = await fetch('battleship/api/join', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ namePlayer: playerName , gameID: gameID})
+            });
+
+            if (response.ok) {
+                const gameState = await response.json();
+                setGameState(gameState);
+                console.log(gameState);
+            } else {
+                console.error(response.statusText);
+            }
+        } 
+        catch (error) {
+            if (error instanceof Error) {
+                console.error(error.toString());
+            } else {
+                console.log('Unexpected error', error);
+            }
+        }
+    }
+
+
     return (
-        <form onSubmit={(e) => tryStartGame(e)}>
-            <input value={playerOne}
-                placeholder="Player 1 name"
-                onChange={(e) => setPlayerOne(e.target.value)}
+        <div >
+            <input value={playerName}
+                placeholder="Player name"
+                onChange={(e) => setPlayerName(e.target.value)}
             />
 
-            <input value={playerTwo}
-                placeholder="Player 2 name"
-                onChange={(e) => setPlayerTwo(e.target.value)}
+            <input value={gameID}
+                placeholder="Fill in GameID"
+                onChange={(e) => setGameID(e.target.value)}
             />
 
             <p className="errorMessage">{errorMessage}</p>
 
-            <button className="startGameButton" type="submit">
-                Play Battleship!
+            <button className="startGameButton" onClick={() => tryStartGame()}>
+                Start a Battleship game!
             </button>
-        </form>
+            
+            <button className="joinGameButton" onClick={()=> joinGame()}>
+                Join this Battleship game!
+            </button>
+        </div>
     )
 }

@@ -12,30 +12,24 @@ import jakarta.ws.rs.core.Response;
 import battleship.api.models.*;
 import battleship.domain.BattleshipImpl;
 
-
-@Path("/hitspot")
-public class HitSpot {
+@Path("/join")
+public class JoinBattleship {
     @POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response hitspot(
+	public Response initialize(
 			@Context HttpServletRequest request, 
-			HitSpotInput hitSpotInput) {
-
-        int xEntry = hitSpotInput.getxEntry();
-        int yEntry = hitSpotInput.getyEntry();
-        String gameID = hitSpotInput.getGameID();
-        int playerIndex = hitSpotInput.getPlayerIndex();
-
+			JoinInput joinInput) {
+		String namePlayer = joinInput.getNamePlayer();
+		String gameID = joinInput.getGameID();
+		
         HttpSession session = request.getSession(true);
-        BattleshipImpl battleship = (BattleshipImpl) session.getAttribute(gameID+"-battleship");
-        
-        battleship.playerDoesTurn(xEntry, yEntry);
+        BattleshipImpl battleship = (BattleshipImpl) session.getAttribute(gameID +"-battleship");
+        String namePlayer1 = (String) session.getAttribute(gameID+"-player1");
         session.setAttribute(gameID+"-battleship", battleship);
-        
-        String namePlayer1 = (String)session.getAttribute(gameID+"-player1");
-        String namePlayer2 = (String)session.getAttribute(gameID+"-player2");
-		var output = new Battleship(battleship, namePlayer1, namePlayer2, gameID, playerIndex);
+        session.setAttribute(gameID+"-player2", namePlayer);
+
+		var output = new Battleship(battleship, namePlayer1, namePlayer,gameID,2);
 		return Response.status(200).entity(output).build();
 	}
 }

@@ -13,26 +13,21 @@ import battleship.api.models.*;
 import battleship.domain.BattleshipImpl;
 
 
-@Path("/hitspot")
-public class HitSpot {
+@Path("/refresh")
+public class Refresh {
     @POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response hitspot(
+	public Response refresh(
 			@Context HttpServletRequest request, 
-			HitSpotInput hitSpotInput) {
+			ConfirmInput input) {
 
-        int xEntry = hitSpotInput.getxEntry();
-        int yEntry = hitSpotInput.getyEntry();
-        String gameID = hitSpotInput.getGameID();
-        int playerIndex = hitSpotInput.getPlayerIndex();
+        String gameID = input.getGameID();
+        int playerIndex = input.getPlayerIndex();
+        System.out.println("Refresh of player " +playerIndex);
 
         HttpSession session = request.getSession(true);
         BattleshipImpl battleship = (BattleshipImpl) session.getAttribute(gameID+"-battleship");
-        
-        battleship.playerDoesTurn(xEntry, yEntry);
-        session.setAttribute(gameID+"-battleship", battleship);
-        
         String namePlayer1 = (String)session.getAttribute(gameID+"-player1");
         String namePlayer2 = (String)session.getAttribute(gameID+"-player2");
 		var output = new Battleship(battleship, namePlayer1, namePlayer2, gameID, playerIndex);
