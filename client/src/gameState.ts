@@ -31,8 +31,7 @@ interface Boat {
 }
 
 interface SetUpMapEntry {
-    hasBoat: boolean
-    available: boolean
+    status: "available" | "unavailable" | "occupied"
 }
 
 interface GuessMapEntry {

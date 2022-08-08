@@ -158,7 +158,7 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
     const renderKeys = (rowval: number) => {
         var arr = [0,1,2,3,4,5,6,7,8,9]
         return arr.map((val) => { // here you return the new array created by map
-            return <button data-status={gameState.players[player-1].setUpMap[val][rowval].available}
+            return <button data-status={gameState.players[player-1].setUpMap[val][rowval].status}
             onClick={()=>placeShip(val,rowval)}></button>
         });
     };

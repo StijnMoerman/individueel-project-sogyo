@@ -61,10 +61,20 @@ th,td {
   background-color: royalblue;
 }
 
-[data-status = "true"] {
+[data-status = "available"] {
     background-color: aqua;
 }
 
-[data-status = "false"] {
+[data-status = "unavailable"] {
+    background: repeating-linear-gradient(
+      45deg,
+      aqua,
+      aqua 10px,
+      red 10px,
+      red 20px
+    );
+}
+
+[data-status = "occupied"] {
     background-color: red;
 }
