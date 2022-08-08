@@ -5,9 +5,10 @@ import "./SetUpGame.css";
 type SetUpGameProps = {
     gameState: GameState;
     setGameState(newGameState: GameState): void;
+    webSocket: any;
 }
 
-export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
+export function SetUpGame({ gameState, setGameState, webSocket }: SetUpGameProps) {
 
     const [player, setPlayer] = useState(gameState.activePlayerIndex);
     console.log(gameState);

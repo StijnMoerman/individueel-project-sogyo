@@ -5,9 +5,10 @@ import "./Play.css";
 type PlayProps = {
     gameState: GameState;
     setGameState(newGameState: GameState): void;
+    webSocket: any;
 }
 
-export function Play({ gameState, setGameState }: PlayProps) {
+export function Play({ gameState, setGameState, webSocket }: PlayProps) {
 
     const [playMessage, setPlayMessage] = useState("Turn of " +gameState.players[0].name +". ");
     const [hitOrMissMessage, setHitOrMissMessage] = useState("");

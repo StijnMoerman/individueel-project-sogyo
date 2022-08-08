@@ -4,9 +4,10 @@ import "./StartGame.css";
 
 type StartGameProps = {
     setGameState(newGameState: GameState): void;
+    webSocket: any;
 }
 
-export function StartGame({ setGameState }: StartGameProps) {
+export function StartGame({ setGameState , webSocket }: StartGameProps) {
 
     const [errorMessage, setErrorMessage] = useState("");
     const [playerName, setPlayerName] = useState("");
