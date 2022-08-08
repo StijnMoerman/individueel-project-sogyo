@@ -155,7 +155,7 @@ public class Player {
         }
         else if (direction.charAt(0) == 'W' && xEntry + 1 >= placedShip.getLength()) {
             for (int i = 0; i < placedShip.getLength(); i++) {
-                if (placeMap[xEntry-i][yEntry].getAvailable()) {
+                if (!placeMap[xEntry-i][yEntry].getAvailable()) {
                     correctPlacement = false;
                 }
             }
@@ -193,7 +193,7 @@ public class Player {
         }
         else if (direction.charAt(0) == 'E' && 10 - xEntry >= placedShip.getLength()) {
             for (int i = 0; i < placedShip.getLength(); i++) {
-                if (placeMap[xEntry+i][yEntry].getAvailable()) {
+                if (!placeMap[xEntry+i][yEntry].getAvailable()) {
                     correctPlacement = false;
                 }
             }
