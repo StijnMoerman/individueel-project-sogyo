@@ -24,17 +24,17 @@ public class HitSpot {
 
         int xEntry = hitSpotInput.getxEntry();
         int yEntry = hitSpotInput.getyEntry();
-        String gameID = "";
+        String gameID = hitSpotInput.getGameID();
         int playerIndex = hitSpotInput.getPlayerIndex();
 
         HttpSession session = request.getSession(true);
-        BattleshipImpl battleship = (BattleshipImpl) session.getAttribute("battleship");
+        BattleshipImpl battleship = (BattleshipImpl) session.getAttribute(gameID+"-battleship");
         
         battleship.playerDoesTurn(xEntry, yEntry);
-        session.setAttribute("battleship", battleship);
+        session.setAttribute(gameID+"-battleship", battleship);
         
-        String namePlayer1 = (String)session.getAttribute("player1");
-        String namePlayer2 = (String)session.getAttribute("player2");
+        String namePlayer1 = (String)session.getAttribute(gameID+"-player1");
+        String namePlayer2 = (String)session.getAttribute(gameID+"-player2");
 		var output = new Battleship(battleship, namePlayer1, namePlayer2, gameID, playerIndex);
 		return Response.status(200).entity(output).build();
 	}

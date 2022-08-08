@@ -126,41 +126,32 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
     }
 
     async function confirmPlacement() {
-        if (player == 1) {
-            setPlayer(2);
-            setPlayMessage("Turn of " +gameState.players[1].name +".");
-            if (confirmButton.current != null) {
-                confirmButton.current.style.display = "none";
-            }
-        }
-        
-        else {
-            try {
-                const response = await fetch('battleship/api/confirm', {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({gameID: gameState.gameID, playerIndex: player})
-                });
+        try {
+            const response = await fetch('battleship/api/confirm', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({gameID: gameState.gameID, playerIndex: player})
+            });
 
-                if (response.ok) {
-                    const gameState = await response.json();
-                    setGameState(gameState);
-                    console.log(gameState);
-                } else {
-                    console.error(response.statusText);
-                }
-            } 
-            catch (error) {
-                if (error instanceof Error) {
-                    console.error(error.toString());
-                } else {
-                    console.log('Unexpected error', error);
-                }
+            if (response.ok) {
+                const gameState = await response.json();
+                setGameState(gameState);
+                console.log(gameState);
+            } else {
+                console.error(response.statusText);
+            }
+        } 
+        catch (error) {
+            if (error instanceof Error) {
+                console.error(error.toString());
+            } else {
+                console.log('Unexpected error', error);
             }
         }
+    
     }
 
     

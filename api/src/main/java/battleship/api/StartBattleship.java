@@ -36,6 +36,7 @@ public class StartBattleship {
         HttpSession session = request.getSession(true);
         session.setAttribute(gameID +"-battleship", battleship);
         session.setAttribute(gameID +"-player1", namePlayer);
+		session.setAttribute(gameID+"-endofsetup", false);
 
 		var output = new Battleship(battleship, namePlayer, "",gameID,1);
 		return Response.status(200).entity(output).build();
