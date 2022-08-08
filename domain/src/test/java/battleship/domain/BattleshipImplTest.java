@@ -209,10 +209,10 @@ public class BattleshipImplTest {
     public void fleetPlacedWhenAllShipsPlaced() {
         BattleshipImpl Battleship = new BattleshipImpl();
         Battleship.getPlayer(1).placeShip(0,0,0,"South");
-        Battleship.getPlayer(1).placeShip(1,1,0,"South");
-        Battleship.getPlayer(1).placeShip(2,2,0,"South");
-        Battleship.getPlayer(1).placeShip(3,3,0,"South");
-        Battleship.getPlayer(1).placeShip(4,4,0,"South");
+        Battleship.getPlayer(1).placeShip(1,2,0,"South");
+        Battleship.getPlayer(1).placeShip(2,4,0,"South");
+        Battleship.getPlayer(1).placeShip(3,6,0,"South");
+        Battleship.getPlayer(1).placeShip(4,8,0,"South");
         assertTrue(Battleship.getPlayer(1).getFleet().isPlaced());
     }
 
@@ -220,27 +220,27 @@ public class BattleshipImplTest {
     public void playerOneFleetDestroyed() {
         BattleshipImpl Battleship = new BattleshipImpl();
         Battleship.getPlayer(1).placeShip(0,0,0,"South");
-        Battleship.getPlayer(1).placeShip(1,1,0,"South");
-        Battleship.getPlayer(1).placeShip(2,2,0,"South");
-        Battleship.getPlayer(1).placeShip(3,3,0,"South");
-        Battleship.getPlayer(1).placeShip(4,4,0,"South");
+        Battleship.getPlayer(1).placeShip(1,2,0,"South");
+        Battleship.getPlayer(1).placeShip(2,4,0,"South");
+        Battleship.getPlayer(1).placeShip(3,6,0,"South");
+        Battleship.getPlayer(1).placeShip(4,8,0,"South");
         Battleship.getPlayer(2).doTurn(0,0);
         Battleship.getPlayer(2).doTurn(0,1);
         Battleship.getPlayer(2).doTurn(0,2);
         Battleship.getPlayer(2).doTurn(0,3);
         Battleship.getPlayer(2).doTurn(0,4);
-        Battleship.getPlayer(2).doTurn(1,0);
-        Battleship.getPlayer(2).doTurn(1,1);
-        Battleship.getPlayer(2).doTurn(1,2);
-        Battleship.getPlayer(2).doTurn(1,3);
         Battleship.getPlayer(2).doTurn(2,0);
         Battleship.getPlayer(2).doTurn(2,1);
         Battleship.getPlayer(2).doTurn(2,2);
-        Battleship.getPlayer(2).doTurn(3,0);
-        Battleship.getPlayer(2).doTurn(3,1);
-        Battleship.getPlayer(2).doTurn(3,2);
+        Battleship.getPlayer(2).doTurn(2,3);
         Battleship.getPlayer(2).doTurn(4,0);
         Battleship.getPlayer(2).doTurn(4,1);
+        Battleship.getPlayer(2).doTurn(4,2);
+        Battleship.getPlayer(2).doTurn(6,0);
+        Battleship.getPlayer(2).doTurn(6,1);
+        Battleship.getPlayer(2).doTurn(6,2);
+        Battleship.getPlayer(2).doTurn(8,0);
+        Battleship.getPlayer(2).doTurn(8,1);
         assertTrue(Battleship.getPlayer(1).getFleet().getShip(1).isDestroyed());
         assertTrue(Battleship.getPlayer(1).getFleet().isDestroyed());
         assertTrue(Battleship.isEndOfGame());
@@ -251,27 +251,27 @@ public class BattleshipImplTest {
     public void playerTwoFleetDestroyed() {
         BattleshipImpl Battleship = new BattleshipImpl();
         Battleship.getPlayer(2).placeShip(0,0,0,"South");
-        Battleship.getPlayer(2).placeShip(1,1,0,"South");
-        Battleship.getPlayer(2).placeShip(2,2,0,"South");
-        Battleship.getPlayer(2).placeShip(3,3,0,"South");
-        Battleship.getPlayer(2).placeShip(4,4,0,"South");
+        Battleship.getPlayer(2).placeShip(1,2,0,"South");
+        Battleship.getPlayer(2).placeShip(2,4,0,"South");
+        Battleship.getPlayer(2).placeShip(3,6,0,"South");
+        Battleship.getPlayer(2).placeShip(4,8,0,"South");
         Battleship.getPlayer(1).doTurn(0,0);
         Battleship.getPlayer(1).doTurn(0,1);
         Battleship.getPlayer(1).doTurn(0,2);
         Battleship.getPlayer(1).doTurn(0,3);
         Battleship.getPlayer(1).doTurn(0,4);
-        Battleship.getPlayer(1).doTurn(1,0);
-        Battleship.getPlayer(1).doTurn(1,1);
-        Battleship.getPlayer(1).doTurn(1,2);
-        Battleship.getPlayer(1).doTurn(1,3);
         Battleship.getPlayer(1).doTurn(2,0);
         Battleship.getPlayer(1).doTurn(2,1);
         Battleship.getPlayer(1).doTurn(2,2);
-        Battleship.getPlayer(1).doTurn(3,0);
-        Battleship.getPlayer(1).doTurn(3,1);
-        Battleship.getPlayer(1).doTurn(3,2);
+        Battleship.getPlayer(1).doTurn(2,3);
         Battleship.getPlayer(1).doTurn(4,0);
         Battleship.getPlayer(1).doTurn(4,1);
+        Battleship.getPlayer(1).doTurn(4,2);
+        Battleship.getPlayer(1).doTurn(6,0);
+        Battleship.getPlayer(1).doTurn(6,1);
+        Battleship.getPlayer(1).doTurn(6,2);
+        Battleship.getPlayer(1).doTurn(8,0);
+        Battleship.getPlayer(1).doTurn(8,1);
         assertTrue(Battleship.getPlayer(2).getFleet().getShip(1).isDestroyed());
         assertTrue(Battleship.getPlayer(2).getFleet().isDestroyed());
         assertTrue(Battleship.isEndOfGame());
@@ -282,10 +282,10 @@ public class BattleshipImplTest {
     public void testTurnSwitch() {
         BattleshipImpl Battleship = new BattleshipImpl();
         Battleship.getPlayer(2).placeShip(0,0,0,"South");
-        Battleship.getPlayer(2).placeShip(1,1,0,"South");
-        Battleship.getPlayer(2).placeShip(2,2,0,"South");
-        Battleship.getPlayer(2).placeShip(3,3,0,"South");
-        Battleship.getPlayer(2).placeShip(4,4,0,"South");
+        Battleship.getPlayer(2).placeShip(1,2,0,"South");
+        Battleship.getPlayer(2).placeShip(2,4,0,"South");
+        Battleship.getPlayer(2).placeShip(3,6,0,"South");
+        Battleship.getPlayer(2).placeShip(4,8,0,"South");
         assertTrue(Battleship.isPlayersTurn(1));
         Battleship.playerDoesTurn(0,0);
         assertTrue(Battleship.isPlayersTurn(1));
