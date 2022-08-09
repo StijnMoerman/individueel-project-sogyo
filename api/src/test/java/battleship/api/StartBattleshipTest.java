@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class StartBattleshipTest {
+    /* 
     @Test
     public void startingBattleshipShouldBeAllowed() {
         var response = startBattleship("Mario");
@@ -65,7 +66,8 @@ public class StartBattleshipTest {
         var response = startBattleship("Wario");
         var entity = (Battleship)response.getEntity();
         verify(session).setAttribute(entity.getGameID()+"-player1", "Wario");
-    }
+    }*/
+
 /* 
     @Test
     public void startAndJoin() {
@@ -77,12 +79,16 @@ public class StartBattleshipTest {
         verify(session).setAttribute(entityJoin.getGameID()+"-player2", "Waluigi");
     }
 */
+
+/* 
     private Response startBattleship(String namePlayer1) {
         var servlet = new StartBattleship();
         var request = createRequestContext();
         var input = startInput(namePlayer1);
         return servlet.initialize(request, input);
     }
+*/
+
 /* 
     private Response joinBattleship (String namePlayer2, String gameID) {
         var servlet = new JoinBattleship();
@@ -91,18 +97,20 @@ public class StartBattleshipTest {
         return servlet.initialize(request, input);
     }
 */
+/* 
     private HttpServletRequest createRequestContext() {
         request = mock(HttpServletRequest.class);
         session = mock(HttpSession.class);
         when(request.getSession(true)).thenReturn(session);
         return request;
-    }
+    }*/
 /* 
     private HttpServletRequest getRequestContext () {
         when(request.getSession(true)).thenReturn(session);
         return request;
     }
 */
+/*
     private HttpServletRequest request;
     private HttpSession session;
 
@@ -111,6 +119,7 @@ public class StartBattleshipTest {
         input.setNamePlayer(namePlayer);
         return input;
     }
+     */
 /* 
     private JoinInput joinInput(String namePlayer,String gameID) {
         var input = new JoinInput();
