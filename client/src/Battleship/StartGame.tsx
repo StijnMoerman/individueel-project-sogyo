@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { web } from "webpack";
 import type { GameState } from "../gameState";
 import "./StartGame.css";
 
@@ -13,45 +14,19 @@ export function StartGame({ setGameState , webSocket }: StartGameProps) {
     const [playerName, setPlayerName] = useState("");
     const [gameID, setGameID] = useState("");
 
+
+
     async function tryStartGame() {
         if (!playerName) {
             setErrorMessage("A name is required for players");
             return;
         }
         setErrorMessage("");
-        startNewGame();
-    }
-
-        
-
-    async function startNewGame() {
         console.log("Make new game, with new gameID");
-        try {
-            const response = await fetch('battleship/api/start', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({namePlayer: playerName})
-            });
-
-            if (response.ok) {
-                const gameState = await response.json();
-                setGameState(gameState);
-                console.log(gameState);
-            } else {
-                console.error(response.statusText);
-            }
-        } 
-        catch (error) {
-            if (error instanceof Error) {
-                console.error(error.toString());
-            } else {
-                console.log('Unexpected error', error);
-            }
-        }
+        webSocket.send(JSON.stringify({namePlayer: playerName}));
     }
+
+    
 
         
     async function joinGame() {
@@ -89,6 +64,13 @@ export function StartGame({ setGameState , webSocket }: StartGameProps) {
         }
     }
 
+
+    webSocket.onmessage = (message: { data: string; }) => {
+        const response = JSON.parse(message.data);
+        const gameState = response.json();
+        setGameState(gameState);
+        console.log(gameState);
+    }
 
     return (
         <div >

@@ -68,7 +68,7 @@ public class StartBattleship {
 public class StartBattleship {
 
     @OnMessage
-    public String start(StartInput startInput) {
+    public Battleship start(StartInput startInput) {
         var battleship = new BattleshipImpl();
 		String namePlayer = startInput.getNamePlayer();
 
@@ -80,7 +80,7 @@ public class StartBattleship {
 		.toString();
 
 		var output = new Battleship(battleship, namePlayer, "",gameID,1);
-		return ("Hello" + output);
+		return output;
     }
 
     @OnOpen
