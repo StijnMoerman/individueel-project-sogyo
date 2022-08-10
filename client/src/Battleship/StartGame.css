@@ -1,22 +1,14 @@
-.startGameButton {
-    font-size: 2em;
+button {
     background-color: Aqua;
-    border: 2px solid black;
     transition-duration: 1s;
 }
-.startGameButton:hover {
+button:hover {
+    
+    font-size: 2em;
+    border: 2px solid black;
     background-color: Yellow;
 }
 
-.joinGameButton {
-    font-size: 2em;
-    background-color: Yellow;
-    border: 2px solid black;
-    transition-duration: 1s;
-}
-.joinGameButton:hover {
-    background-color: Aqua;
-}
 
 .errorMessage {
     height: 1em;
