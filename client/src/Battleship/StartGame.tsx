@@ -6,10 +6,9 @@ import "./StartGame.css";
 type StartGameProps = {
     setGameState(newGameState: GameState): void;
     webSocket: any;
-    setWebSocket(newWebSocket: WebSocket): void;
 }
 
-export function StartGame({ setGameState, webSocket, setWebSocket}: StartGameProps) {
+export function StartGame({ setGameState, webSocket}: StartGameProps) {
 
     const [message, setMessage] = useState("");
     const [status,setStatus] = useState("");
@@ -17,9 +16,8 @@ export function StartGame({ setGameState, webSocket, setWebSocket}: StartGamePro
     const [gameID, setGameID] = useState("");
 
     async function connectWebSocket () {
-        var wsURI = 'ws://' + window.location.host;
-        console.log(window.location.host);
-        setWebSocket(new WebSocket(wsURI));
+        var wsURI = 'ws://localhost:9090/start';
+        webSocket = new WebSocket(wsURI);
         webSocket.onopen = function() {
             setStatus('Open');
             setMessage('Connection is now open. Type a name and click Say Hello to send a message.');
@@ -39,8 +37,13 @@ export function StartGame({ setGameState, webSocket, setWebSocket}: StartGamePro
         }
         setMessage("");
         console.log("Make new game, with new gameID");
-        webSocket.send(JSON.stringify({namePlayer: playerName}));
-
+        if (webSocket !== undefined) {
+            setStatus("");
+            webSocket.send(JSON.stringify({namePlayer: playerName}));
+        }
+        else { 
+            setStatus("No webSocket connection yet");
+        }
     }
 
     
@@ -91,10 +94,12 @@ export function StartGame({ setGameState, webSocket, setWebSocket}: StartGamePro
             />
 
             <input value={gameID}
-                placeholder="Fill in GameID"
+                placeholder="GameID"
                 onChange={(e) => setGameID(e.target.value)}
             />
 
+
+            <p className="status">{status}</p>
             <p className="message">{message}</p>
 
             <button className="connectWebSocket" onClick={() => connectWebSocket()}>
