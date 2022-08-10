@@ -16,18 +16,19 @@ export function StartGame({ setGameState, webSocket}: StartGameProps) {
     const [gameID, setGameID] = useState("");
 
     async function connectWebSocket () {
-        var wsURI = 'ws://localhost:9090/start';
+        var wsURI = 'ws://localhost:9000/ws';
         webSocket = new WebSocket(wsURI);
         webSocket.onopen = function() {
-            setStatus('Open');
-            setMessage('Connection is now open. Type a name and click Say Hello to send a message.');
+            setStatus('Connection is now open.');
         };
         webSocket.onmessage = function(event: any){
             const response = JSON.parse(event.data);
-            const gameState = response.json();
-            setGameState(gameState);
+            const gameState = response;
+            //setGameState(gameState);
+            console.log("Dit is de response");
             console.log(gameState);
         }
+        console.log(webSocket);
     }
 
     async function tryStartGame() {
