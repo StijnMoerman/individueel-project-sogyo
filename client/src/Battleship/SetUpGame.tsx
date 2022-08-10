@@ -8,7 +8,7 @@ type SetUpGameProps = {
     webSocket: any;
 }
 
-export function SetUpGame({ gameState, setGameState, webSocket }: SetUpGameProps) {
+export function SetUpGame({ gameState, setGameState, webSocket}: SetUpGameProps) {
 
     const [player, setPlayer] = useState(gameState.activePlayerIndex);
     console.log(gameState);

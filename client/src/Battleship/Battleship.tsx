@@ -20,15 +20,15 @@ export function Battleship() {
     // The call to useState follows the "rules of hooks": https://reactjs.org/docs/hooks-rules.html
     // To check if code you added also follows the rules of hooks, run "npm run lint" in the command line
     const [ gameState, setGameState ] = useState<GameState | undefined>(undefined);
-    let ws = new WebSocket("ws://localhost:9090");
+    const [ webSocket, setWebSocket ] = useState<WebSocket | void>(undefined);
 
     if (!gameState) {
-        return <StartGame setGameState={setGameState} webSocket = {ws} />
+        return <StartGame setGameState={setGameState} webSocket = {webSocket} setWebSocket = {setWebSocket} />
     }
 
     if (!gameState.gameStatus.endOfSetUp) {
-        return <SetUpGame gameState={gameState} setGameState={setGameState} webSocket = {ws} />
+        return <SetUpGame gameState={gameState} setGameState={setGameState} webSocket = {webSocket} />
     }
 
-    return <Play gameState={gameState} setGameState={setGameState} webSocket = {ws} />
+    return <Play gameState={gameState} setGameState={setGameState} webSocket = {webSocket} />
 }

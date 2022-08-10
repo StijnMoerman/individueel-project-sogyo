@@ -6,24 +6,41 @@ import "./StartGame.css";
 type StartGameProps = {
     setGameState(newGameState: GameState): void;
     webSocket: any;
+    setWebSocket(newWebSocket: WebSocket): void;
 }
 
-export function StartGame({ setGameState , webSocket }: StartGameProps) {
+export function StartGame({ setGameState, webSocket, setWebSocket}: StartGameProps) {
 
-    const [errorMessage, setErrorMessage] = useState("");
+    const [message, setMessage] = useState("");
+    const [status,setStatus] = useState("");
     const [playerName, setPlayerName] = useState("");
     const [gameID, setGameID] = useState("");
 
-
+    async function connectWebSocket () {
+        var wsURI = 'ws://' + window.location.host;
+        console.log(window.location.host);
+        setWebSocket(new WebSocket(wsURI));
+        webSocket.onopen = function() {
+            setStatus('Open');
+            setMessage('Connection is now open. Type a name and click Say Hello to send a message.');
+        };
+        webSocket.onmessage = function(event: any){
+            const response = JSON.parse(event.data);
+            const gameState = response.json();
+            setGameState(gameState);
+            console.log(gameState);
+        }
+    }
 
     async function tryStartGame() {
         if (!playerName) {
-            setErrorMessage("A name is required for players");
+            setMessage("A name is required for players");
             return;
         }
-        setErrorMessage("");
+        setMessage("");
         console.log("Make new game, with new gameID");
         webSocket.send(JSON.stringify({namePlayer: playerName}));
+
     }
 
     
@@ -31,10 +48,10 @@ export function StartGame({ setGameState , webSocket }: StartGameProps) {
         
     async function joinGame() {
         if (!gameID ) {
-            setErrorMessage("A gameID is required to join a game");
+            setMessage("A gameID is required to join a game");
             return;
         }
-        setErrorMessage("");
+        setMessage("");
 
         console.log("Try to connect with game with gameID" + {gameID});
         try {
@@ -65,12 +82,6 @@ export function StartGame({ setGameState , webSocket }: StartGameProps) {
     }
 
 
-    webSocket.onmessage = (message: { data: string; }) => {
-        const response = JSON.parse(message.data);
-        const gameState = response.json();
-        setGameState(gameState);
-        console.log(gameState);
-    }
 
     return (
         <div >
@@ -84,12 +95,16 @@ export function StartGame({ setGameState , webSocket }: StartGameProps) {
                 onChange={(e) => setGameID(e.target.value)}
             />
 
-            <p className="errorMessage">{errorMessage}</p>
+            <p className="message">{message}</p>
 
+            <button className="connectWebSocket" onClick={() => connectWebSocket()}>
+                Connect to WebSocket server!
+            </button>
+            <br></br>
             <button className="startGameButton" onClick={() => tryStartGame()}>
                 Start a Battleship game!
             </button>
-            
+            <br></br>
             <button className="joinGameButton" onClick={()=> joinGame()}>
                 Join this Battleship game!
             </button>
