@@ -53,16 +53,16 @@ test {
     // Use junit platform for unit tests
     useJUnitPlatform()
 }
-
+/*
 jacocoTestCoverageVerification {
     violationRules {
         rule {
             limit {
-                minimum = 0
+                minimum = 0.300
             }
         }
     }
-}
+}*/
 
 task stage(dependsOn: ['build', 'clean'])
 build.mustRunAfter clean
