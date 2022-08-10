@@ -40,7 +40,14 @@ module.exports = {
         historyApiFallback: true,
         proxy: {
             '/battleship': 'http://localhost:9090',
+            '/websocket': {
+                target: 'ws://localhost:9090',
+                ws: true
+            },
         },
+        client: {
+            logging: 'info',
+        }
     },
     plugins: [
         new HtmlWebpackPlugin({

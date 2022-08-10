@@ -69,7 +69,8 @@ public class StartBattleship {
 
     @OnMessage
     public Battleship start(StartInput startInput) {
-        var battleship = new BattleshipImpl();
+        System.out.println("WebSocket on message");
+        BattleshipImpl battleship = new BattleshipImpl();
 		String namePlayer = startInput.getNamePlayer();
 
 		Random random = new Random();
@@ -92,4 +93,9 @@ public class StartBattleship {
     public void helloOnClose(CloseReason reason) {
         System.out.println("WebSocket connection closed with CloseCode: " + reason.getCloseCode());
     }
+
+	@OnError
+	public void helloOnError(Session session, Throwable throwable) {
+		throwable.printStackTrace();
+	}
 }
