@@ -9,8 +9,12 @@ button:hover {
     background-color: Yellow;
 }
 
+.status {
+    height: 1em;
+    color: blue;
+}
 
-.errorMessage {
+.message {
     height: 1em;
     color: red;
 }
