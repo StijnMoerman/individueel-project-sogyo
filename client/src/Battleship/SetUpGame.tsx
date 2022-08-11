@@ -215,7 +215,7 @@ export function SetUpGame({ gameState, setGameState, setRefreshIntervalID, refre
     const renderKeys = (rowval: number) => {
         var arr = [0,1,2,3,4,5,6,7,8,9]
         return arr.map((val) => { // here you return the new array created by map
-            return <button data-status={gameState.players[player-1].setUpMap[val][rowval].status}
+            return <button className="placeButton" data-status={gameState.players[player-1].setUpMap[val][rowval].status}
             disabled={gameState.players[player-1].setUpMap[val][rowval].status!='available'}
             onClick={()=>placeShip(val,rowval)}></button>
         });
@@ -233,15 +233,12 @@ export function SetUpGame({ gameState, setGameState, setRefreshIntervalID, refre
             <div className="column" id="options">
                 <h2>Set up your fleet!</h2>
                 Welcome to a new game of Battleship with gameID {gameState.gameID}! {playMessage} Pick a ship and a direction and then click on a cell in the map to place your ship. 
-                <br></br>
                 Ships: <select value={ship.name} onChange={handleShipChange}>
                     {ships}
-                </select>
-                <br></br>
+                </select>&nbsp;
                 Direction: <select value={direction} onChange={handleDirectionChange}>
                     {directions}
-                </select>
-                <br></br>
+                </select>&nbsp;
                 <p className="placeShipMessage" ref={placeMessage}>{placeShipMessage}</p>
                 <button className="confirm" ref={confirmButton}
                     style={{display: "none"}} onClick={()=>confirmPlacement()}> Confirm </button>

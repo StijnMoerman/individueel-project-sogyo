@@ -8,7 +8,7 @@ import urlLogo from "./logo.jpg";
  */
 export function Header() {
     return <header className="main-header">
-        <div>
+        <div className="logo-header">
             <img src={urlLogo} /> 
             Battleship
         </div>
