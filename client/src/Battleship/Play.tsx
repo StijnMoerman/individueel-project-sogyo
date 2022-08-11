@@ -5,9 +5,10 @@ import "./Play.css";
 type PlayProps = {
     gameState: GameState;
     setGameState(newGameState: GameState): void;
+    refreshIntervalID: any;
 }
 
-export function Play({ gameState, setGameState }: PlayProps) {
+export function Play({ gameState, setGameState, refreshIntervalID }: PlayProps) {
 
     const [playMessage, setPlayMessage] = useState("Turn of " +gameState.players[0].name +". ");
     const [hitOrMissMessage, setHitOrMissMessage] = useState("");
@@ -37,6 +38,7 @@ export function Play({ gameState, setGameState }: PlayProps) {
                 }
                 if (gameState.gameStatus.endOfGame) {
                     setPlayMessage("We have a winner! Congrats to "+gameState.gameStatus.winner +"!");
+                    clearInterval(refreshIntervalID);
                 }
                 console.log(gameState);
             } else {
@@ -51,50 +53,6 @@ export function Play({ gameState, setGameState }: PlayProps) {
             }
         }
     }
-
-    async function refresh () {
-        try {
-            const response = await fetch('battleship/api/refresh', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({gameID: gameState.gameID, playerIndex: gameState.activePlayerIndex})
-            });
-
-            if (response.ok) {
-                const gameState = await response.json();
-                setGameState(gameState);
-                if (gameState.players[0].hasTurn) {
-                    setPlayMessage("Turn of " +gameState.players[0].name +". ");
-                }
-                else {
-                    setPlayMessage("Turn of " +gameState.players[1].name +". ");
-                }
-                if (gameState.gameStatus.endOfGame) {
-                    setPlayMessage("We have a winner! Congrats to "+gameState.gameStatus.winner +"!");
-                }
-                console.log(gameState);
-            } else {
-                console.error(response.statusText);
-            }
-        } 
-        catch (error) {
-            if (error instanceof Error) {
-                console.error(error.toString());
-            } else {
-                console.log('Unexpected error', error);
-            }
-        }
-    }
-
-    if (!beginInterval) {
-        console.log("Begin refresh");
-        setInterval(refresh,1000);
-        setBeginInterval(true);
-    }
-
 
     const renderKeys = (rowval: number, varPlayer: number) => {
         var arr = [0,1,2,3,4,5,6,7,8,9]

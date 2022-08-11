@@ -5,20 +5,18 @@ import "./SetUpGame.css";
 type SetUpGameProps = {
     gameState: GameState;
     setGameState(newGameState: GameState): void;
+    setRefreshIntervalID(newRefreshIntervalID: any): void;
+    refreshIntervalID: any;
 }
 
-export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
+export function SetUpGame({ gameState, setGameState, setRefreshIntervalID, refreshIntervalID }: SetUpGameProps) {
 
     const [player, setPlayer] = useState(gameState.activePlayerIndex);
-    console.log(gameState);
-
     const [playMessage, setPlayMessage] = useState("Time to place your fleet.");
-
     const [placeShipMessage, setPlaceShipMessage] = useState("");
-
     const confirmButton = useRef<HTMLButtonElement>(null);
-
     const placeMessage = useRef<HTMLParagraphElement>(null);
+    const [beginInterval,setBeginInterval] = useState(false);
 
     const shipsData = [
         {
@@ -151,6 +149,11 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
                 if (placeMessage.current != null) {
                     placeMessage.current.style.color = "blue";
                 }
+                if (!beginInterval) {
+                    console.log("Begin refresh");
+                    setRefreshIntervalID(setInterval(refresh,1000));
+                    setBeginInterval(true);
+                }
 
             } else {
                 console.error(response.statusText);
@@ -165,6 +168,46 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
         }
     
     }
+
+    
+    async function refresh () {
+        try {
+            const response = await fetch('battleship/api/refresh', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({gameID: gameState.gameID, playerIndex: gameState.activePlayerIndex})
+            });
+
+            if (response.ok) {
+                const gameState = await response.json();
+                setGameState(gameState);
+                if (gameState.players[0].hasTurn) {
+                    setPlayMessage("Turn of " +gameState.players[0].name +". ");
+                }
+                else {
+                    setPlayMessage("Turn of " +gameState.players[1].name +". ");
+                }
+                if (gameState.gameStatus.endOfGame) {
+                    setPlayMessage("We have a winner! Congrats to "+gameState.gameStatus.winner +"!");
+                    clearInterval(refreshIntervalID);
+                }
+                console.log(gameState);
+            } else {
+                console.error(response.statusText);
+            }
+        } 
+        catch (error) {
+            if (error instanceof Error) {
+                console.error(error.toString());
+            } else {
+                console.log('Unexpected error', error);
+            }
+        }
+    }
+
 
     
     const renderKeys = (rowval: number) => {
