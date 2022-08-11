@@ -21,8 +21,6 @@ export function StartGame({ setGameState }: StartGameProps) {
         startNewGame();
     }
 
-        
-
     async function startNewGame() {
         console.log("Make new game, with new gameID");
         try {
@@ -77,6 +75,7 @@ export function StartGame({ setGameState }: StartGameProps) {
                 console.log(gameState);
             } else {
                 console.error(response.statusText);
+                setErrorMessage('There is no game with this gameID (yet)');
             }
         } 
         catch (error) {
@@ -91,24 +90,28 @@ export function StartGame({ setGameState }: StartGameProps) {
 
     return (
         <div >
+            <h2>Start a game of Battleship</h2>
+            <p> Enter your (nick)name to begin a game. A gameID will be generated to share with your opponent.
+                To join a game, enter this gameID as well.
+            </p>
+
             <input value={playerName}
-                placeholder="Player name"
+                placeholder="Name"
                 onChange={(e) => setPlayerName(e.target.value)}
             />
-
+            <br></br>
             <input value={gameID}
-                placeholder="Fill in GameID"
+                placeholder="GameID"
                 onChange={(e) => setGameID(e.target.value)}
             />
 
             <p className="errorMessage">{errorMessage}</p>
 
             <button className="startGameButton" onClick={() => tryStartGame()}>
-                Start a Battleship game!
+                Start!
             </button>
-            
             <button className="joinGameButton" onClick={()=> joinGame()}>
-                Join this Battleship game!
+                Join!
             </button>
         </div>
     )
