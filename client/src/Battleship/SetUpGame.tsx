@@ -14,9 +14,11 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
 
     const [playMessage, setPlayMessage] = useState("Time to place your fleet.");
 
-    const [placeShipMessage, setPlaceShipMessage] = useState("Pick a ship and a direction and then click on a cell in the map on the right to place your ship.");
+    const [placeShipMessage, setPlaceShipMessage] = useState("");
 
     const confirmButton = useRef<HTMLButtonElement>(null);
+
+    const placeMessage = useRef<HTMLParagraphElement>(null);
 
     const shipsData = [
         {
@@ -105,6 +107,7 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
                 if (response.ok) {
                     const gameState = await response.json();
                     setGameState(gameState);
+                    setPlaceShipMessage("");
                     console.log(gameState);
                     if (gameState.players[player-1].fleet.placed) {
                         if (confirmButton.current != null) {
@@ -113,6 +116,7 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
                     }
                 } else {
                     console.error(response.statusText);
+                    setPlaceShipMessage("This is not a valid placement for this ship");
                 }
             } 
             catch (error) {
@@ -139,7 +143,15 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
             if (response.ok) {
                 const gameState = await response.json();
                 setGameState(gameState);
+                setPlaceShipMessage("Wait for the other player to confirm their placement");
                 console.log(gameState);
+                if (confirmButton.current != null) {
+                    confirmButton.current.style.display = "none";
+                }
+                if (placeMessage.current != null) {
+                    placeMessage.current.style.color = "blue";
+                }
+
             } else {
                 console.error(response.statusText);
             }
@@ -159,6 +171,7 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
         var arr = [0,1,2,3,4,5,6,7,8,9]
         return arr.map((val) => { // here you return the new array created by map
             return <button data-status={gameState.players[player-1].setUpMap[val][rowval].status}
+            disabled={gameState.players[player-1].setUpMap[val][rowval].status!='available'}
             onClick={()=>placeShip(val,rowval)}></button>
         });
     };
@@ -173,7 +186,8 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
     return (
         <div className="row">
             <div className="column" id="options">
-                Hi! Welcome to a new game of Battleship with gameID {gameState.gameID}! Time to set up your fleet {gameState.players[player-1].name}! {playMessage}
+                <h2>Set up your fleet!</h2>
+                Welcome to a new game of Battleship with gameID {gameState.gameID}! {playMessage} Pick a ship and a direction and then click on a cell in the map to place your ship. 
                 <br></br>
                 Ships: <select value={ship.name} onChange={handleShipChange}>
                     {ships}
@@ -183,7 +197,7 @@ export function SetUpGame({ gameState, setGameState }: SetUpGameProps) {
                     {directions}
                 </select>
                 <br></br>
-                {placeShipMessage}
+                <p className="placeShipMessage" ref={placeMessage}>{placeShipMessage}</p>
                 <button className="confirm" ref={confirmButton}
                     style={{display: "none"}} onClick={()=>confirmPlacement()}> Confirm </button>
 

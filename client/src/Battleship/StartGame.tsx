@@ -107,10 +107,10 @@ export function StartGame({ setGameState }: StartGameProps) {
 
             <p className="errorMessage">{errorMessage}</p>
 
-            <button className="startGameButton" onClick={() => tryStartGame()}>
+            <button className="beginButton" onClick={() => tryStartGame()}>
                 Start!
             </button>
-            <button className="joinGameButton" onClick={()=> joinGame()}>
+            <button className="beginButton" onClick={()=> joinGame()}>
                 Join!
             </button>
         </div>
