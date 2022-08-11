@@ -30,15 +30,15 @@ export function Play({ gameState, setGameState, refreshIntervalID }: PlayProps) 
             if (response.ok) {
                 const gameState = await response.json();
                 setGameState(gameState);
-                if (gameState.players[0].hasTurn) {
+                if (gameState.gameStatus.endOfGame) {
+                    setPlayMessage("We have a winner! Congrats to "+gameState.gameStatus.winner +"!");
+                    clearInterval(refreshIntervalID);
+                }
+                else if (gameState.players[0].hasTurn) {
                     setPlayMessage("Turn of " +gameState.players[0].name +". ");
                 }
                 else {
                     setPlayMessage("Turn of " +gameState.players[1].name +". ");
-                }
-                if (gameState.gameStatus.endOfGame) {
-                    setPlayMessage("We have a winner! Congrats to "+gameState.gameStatus.winner +"!");
-                    clearInterval(refreshIntervalID);
                 }
                 console.log(gameState);
             } else {

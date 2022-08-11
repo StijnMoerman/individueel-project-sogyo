@@ -17,6 +17,7 @@ export function SetUpGame({ gameState, setGameState, setRefreshIntervalID, refre
     const confirmButton = useRef<HTMLButtonElement>(null);
     const placeMessage = useRef<HTMLParagraphElement>(null);
     const [beginInterval,setBeginInterval] = useState(false);
+    var refreshID: any;
 
     const shipsData = [
         {
@@ -151,7 +152,8 @@ export function SetUpGame({ gameState, setGameState, setRefreshIntervalID, refre
                 }
                 if (!beginInterval) {
                     console.log("Begin refresh");
-                    setRefreshIntervalID(setInterval(refresh,1000));
+                    refreshID = setInterval(refresh,1000);
+                    setRefreshIntervalID(refreshID);
                     setBeginInterval(true);
                 }
 
@@ -184,15 +186,15 @@ export function SetUpGame({ gameState, setGameState, setRefreshIntervalID, refre
             if (response.ok) {
                 const gameState = await response.json();
                 setGameState(gameState);
-                if (gameState.players[0].hasTurn) {
+                if (gameState.gameStatus.endOfGame) {
+                    setPlayMessage("We have a winner! Congrats to "+gameState.gameStatus.winner +"!");
+                    clearInterval(refreshID);
+                }
+                else if (gameState.players[0].hasTurn) {
                     setPlayMessage("Turn of " +gameState.players[0].name +". ");
                 }
                 else {
                     setPlayMessage("Turn of " +gameState.players[1].name +". ");
-                }
-                if (gameState.gameStatus.endOfGame) {
-                    setPlayMessage("We have a winner! Congrats to "+gameState.gameStatus.winner +"!");
-                    clearInterval(refreshIntervalID);
                 }
                 console.log(gameState);
             } else {
