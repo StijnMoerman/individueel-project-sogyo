@@ -21,7 +21,7 @@ button:hover {
         aqua 2rem
     );
     background-size: 200% 200%;
-    animation: barberpole 10s linear infinite;
+    animation: barberpole 1.5s linear infinite;
 }
 
 @keyframes barberpole {
